@@ -14,11 +14,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7875510711396796719, guid: 18603bebba2fa464b8240d21b92660c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7875510711396796719, guid: 18603bebba2fa464b8240d21b92660c3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7875510711396796719, guid: 18603bebba2fa464b8240d21b92660c3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7949889105592065843, guid: 18603bebba2fa464b8240d21b92660c3, type: 3}
       propertyPath: m_Name
-      value: Block_2
+      value: Block_2_1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -245,11 +245,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7875510711396796719, guid: 18603bebba2fa464b8240d21b92660c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7875510711396796719, guid: 18603bebba2fa464b8240d21b92660c3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7875510711396796719, guid: 18603bebba2fa464b8240d21b92660c3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -392,10 +392,10 @@ PrefabInstance:
       addedObject: {fileID: 3079826952071118606}
     - targetCorrespondingSourceObject: {fileID: 1210210515038987017, guid: 6ffdacd9f9cf044019ac81e50b8c7a2c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 315198645159951296}
+      addedObject: {fileID: 3422780547872484410}
     - targetCorrespondingSourceObject: {fileID: 1210210515038987017, guid: 6ffdacd9f9cf044019ac81e50b8c7a2c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3422780547872484410}
+      addedObject: {fileID: 315198645159951296}
     - targetCorrespondingSourceObject: {fileID: 1210210515038987017, guid: 6ffdacd9f9cf044019ac81e50b8c7a2c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 824111616151419111}

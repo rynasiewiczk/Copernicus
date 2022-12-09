@@ -36,11 +36,8 @@ public class ScriptableObjectWindow : OdinEditorWindow
 	{
 		base.Initialize();
 		var assembly = Assembly.Load(new AssemblyName("Assembly-CSharp"));
-		var editorAssembly = Assembly.Load(new AssemblyName("Assembly-CSharp-Editor"));
 
 		types = GetSosFromAssembly(assembly);
-		var editorTypes = GetSosFromAssembly(editorAssembly);
-		types = types.Concat(editorTypes).ToArray();
 
 		Type[] GetSosFromAssembly(Assembly assembly1)
 		{
