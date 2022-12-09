@@ -8,6 +8,14 @@ namespace _Project.Scripts
     {
         [SerializeField] private List<Block> _blocks;
 
-        
+        public IReadOnlyList<Block> Blocks => _blocks;
+
+        public void DropOnMap()
+        {
+            foreach (var block in _blocks)
+            {
+                block.DropOnMap();
+            }
+        }
     }
 }
