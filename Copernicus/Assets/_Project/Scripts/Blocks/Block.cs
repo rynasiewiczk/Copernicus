@@ -1,21 +1,25 @@
 namespace _Project.Scripts
 {
-    using System;
     using Sirenix.OdinInspector;
     using UnityEngine;
 
     public class Block : MonoBehaviour
     {
         [SerializeField] private GameObject _starContainer;
-        [SerializeField] private bool _hasStar;
+        [SerializeField] private BlockStar _blockStarPrefab;
+        
+        public BlockStar BlockStar { get; private set; }
 
         public bool IsOnMap { get; private set; }
-        
-        public bool HasStar => _hasStar;
+        public bool HasStar { get; private set; }
 
-        private void OnEnable()
+        public void Init(bool hasStar)
         {
-            _starContainer.SetActive(_hasStar);
+            HasStar = hasStar;
+            if (hasStar)
+            {
+                BlockStar = Instantiate(_blockStarPrefab, _starContainer.transform, false);
+            }
         }
 
         public Vector2Int GetGridPosition()

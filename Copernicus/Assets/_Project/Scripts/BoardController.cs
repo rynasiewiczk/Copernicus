@@ -1,6 +1,7 @@
 namespace _Project.Scripts
 {
     using System.Collections.Generic;
+    using Constellations;
     using UnityEngine;
 
     public class BoardController : SingletonBehaviour<BoardController>
@@ -49,6 +50,31 @@ namespace _Project.Scripts
             {
                 _blocksOnBoard.Add(blockInGroup);
             }
+        }
+
+        public bool IsPositionValidForConstellation(Constellation constellation)
+        {
+            foreach (var constellationPart in constellation.Parts)
+            {
+                if (TryGetBlockAtPosition(constellationPart.GetGridPosition(), out var blockOnMap))
+                {
+                    if (!blockOnMap.HasStar)
+                    {
+                        return false;
+                    }
+
+                    if (blockOnMap.HasStar && blockOnMap.BlockStar.IsAlreadyUsed)
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         private bool TryGetBlockAtPosition(Vector2Int gridPosition, out Block block)
