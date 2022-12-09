@@ -1,6 +1,7 @@
 namespace _Project.Scripts
 {
     using System;
+    using Sirenix.OdinInspector;
     using UnityEngine;
 
     public class Block : MonoBehaviour
@@ -26,7 +27,26 @@ namespace _Project.Scripts
 
         public void DropOnMap()
         {
-            //spawn block on a map with current grid position (new one or this one?)
+            //spawn block (check for star) on a map with current grid position (new one or this one?)
         }
+
+        [Button]
+        public void Validate()
+        {
+            OnValidate();
+        }
+        
+        private void OnValidate()
+        {
+            var group = GetComponentInParent<Group>();
+
+            if (group != null)
+            {
+                var x = Mathf.RoundToInt(transform.localPosition.x);
+                var y = Mathf.RoundToInt(transform.localPosition.y);
+                gameObject.name = $"Block_{x}_{y}";
+            }
+        }
+        
     }
 }
