@@ -2,6 +2,7 @@ namespace _Project.Scripts
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using Sirenix.OdinInspector;
     using UnityEngine;
 
@@ -11,6 +12,15 @@ namespace _Project.Scripts
 
         public IReadOnlyList<Block> Blocks => _blocks;
 
+        public void Init(int numberOfStars)
+        {
+            var blocksInRandom = _blocks.OrderBy(x => Guid.NewGuid()).ToList();
+            for (var i = 0; i < blocksInRandom.Count; i++)
+            {
+                blocksInRandom[i].Init(i < numberOfStars);
+            }
+        }
+        
         public void DropOnMap()
         {
             foreach (var block in _blocks)
