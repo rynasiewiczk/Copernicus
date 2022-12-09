@@ -206,7 +206,7 @@ public class Spline2DInspector : Editor {
 		}
 		if (selectedIndex == index) {
 			EditorGUI.BeginChangeCheck();
-			point = Handles.FreeMoveHandle(point, Quaternion.identity, size * 1.5f * handleSize, Vector3.zero, Handles.CircleHandleCap);
+			var fmh_209_42_638062166942564290 = Quaternion.identity; point = Handles.FreeMoveHandle(point, size * 1.5f * handleSize, Vector3.zero, Handles.CircleHandleCap);
 			if (EditorGUI.EndChangeCheck()) {
 				Undo.RecordObject(spline, "Move Point");
 				EditorUtility.SetDirty(spline);
