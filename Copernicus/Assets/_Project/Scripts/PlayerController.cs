@@ -33,6 +33,7 @@ namespace _Project.Scripts
             _currentDraggable.IsDragged.Value = true;
             _currentDraggable.Root.ChangeLayerToAboveDesk();
             _currentDraggable.SetParentAndScale(null, Vector3.one);
+            Cursor.visible = false;
 
             return true;
         }
@@ -99,6 +100,7 @@ namespace _Project.Scripts
                 _currentDraggable.Root.ChangeLayerToDefault();
                 _currentDraggable.IsDragged.Value = false;
                 _currentDraggable = null;
+                Cursor.visible = true;
             }
         }
 
@@ -161,6 +163,7 @@ namespace _Project.Scripts
             OnUnpickedDraggable?.Invoke(_currentDraggable);
             _currentDraggable.IsDragged.Value = false;
             _currentDraggable = null;
+            Cursor.visible = true;
         }
 
         private void SetChangeDraggableFlag()
