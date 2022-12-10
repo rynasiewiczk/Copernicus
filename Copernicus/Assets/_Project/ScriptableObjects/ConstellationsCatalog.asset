@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a00163e6e6c47c6ae91b993a3e9e75e, type: 3}
+  m_Name: ConstellationsCatalog
+  m_EditorClassIdentifier: 
+  _constellations:
+  - {fileID: 4265756405944947989, guid: 9e1b97cde8ba84c78a0d93c50118b399, type: 3}

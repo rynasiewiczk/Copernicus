@@ -586,6 +586,8 @@ MonoBehaviour:
   _groupsCatalog: {fileID: 11400000, guid: 3202f4772f78949aa898cd4707e8c443, type: 2}
   _initialGroupsSize: 10
   _maxGropusToShow: 3
+  _constellationsCatalog: {fileID: 11400000, guid: 4e93d174003164159957f49e4ad12ad4, type: 2}
+  _maxConstellations: 3
 --- !u!4 &1419050706
 Transform:
   m_ObjectHideFlags: 0
