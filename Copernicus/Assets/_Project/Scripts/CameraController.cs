@@ -1,10 +1,15 @@
 namespace _Project.Scripts
 {
+    using Cinemachine;
     using UnityEngine;
 
     public class CameraController : SingletonBehaviour<CameraController>
     {
+        [SerializeField] private CinemachineVirtualCamera _virtualCamera;
         [SerializeField] private float _moveSpeed;
+        [SerializeField] private float _zoomSpeed;
+        [SerializeField] private float _minZoom;
+        [SerializeField] private float _maxZoom;
         
         private void Update()
         {
@@ -30,7 +35,22 @@ namespace _Project.Scripts
                 moveDir.x += 1;
             }
 
+            var ortoChange = 0f;
+            if (Input.GetKey(KeyCode.Z))
+            {
+                ortoChange += 1f;
+            }
+
+            if (Input.GetKey(KeyCode.X))
+            {
+                ortoChange -= 1f;
+            }
+            
             transform.position += moveDir * _moveSpeed * Time.deltaTime;
+
+            var newSize = _virtualCamera.m_Lens.OrthographicSize + ortoChange * _zoomSpeed * Time.deltaTime;
+            newSize = Mathf.Clamp(newSize, _minZoom, _maxZoom);
+            _virtualCamera.m_Lens.OrthographicSize = newSize;
         }
     }
 }
