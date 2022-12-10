@@ -47,6 +47,11 @@ namespace _Project.Scripts
         }
 
         public void SetColor(Color color) => _spriteRenderer.color = color;
+
+        private void Update()
+        {
+            transform.rotation = Quaternion.identity;
+        }
         
         [Button]
         public void Validate()
