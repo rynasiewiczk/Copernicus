@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: ConstellationsCatalog
   m_EditorClassIdentifier: 
   _constellations:
-  - {fileID: 4265756405944947989, guid: 9e1b97cde8ba84c78a0d93c50118b399, type: 3}
-  - {fileID: 4265756405944947989, guid: dc67dd71bb6244c4998b56918de6bab0, type: 3}
+  - {fileID: 4265756405944947989, guid: ca2d93ab0da9a41abb9ec7c574f318bc, type: 3}
