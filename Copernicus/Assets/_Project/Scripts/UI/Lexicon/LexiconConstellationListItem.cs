@@ -1,7 +1,6 @@
 namespace _Project.Scripts.UI
 {
     using System;
-    using System.Linq;
     using Constellations;
     using UnityEngine;
     using UnityEngine.UI;
@@ -13,7 +12,10 @@ namespace _Project.Scripts.UI
 
         [SerializeField] private Image _image;
         [SerializeField] private Button _button;
+        [SerializeField] private GameObject _notificationObject;
 
+        [SerializeField] private Image _lockedImage;
+        
         public Constellation Constellation { get; private set; }
 
         private void OnEnable()
@@ -34,6 +36,14 @@ namespace _Project.Scripts.UI
             _image.sprite = constellation.Icon;
 
             OnConstellationClick = onClick;
+        }
+
+        public void SetNotificationActive(bool active) => _notificationObject.SetActive(active);
+
+        public void SetUnlocked(bool isUnlocked)
+        {
+            _image.gameObject.SetActive(isUnlocked);
+            _lockedImage.gameObject.SetActive(!isUnlocked);
         }
     }
 }

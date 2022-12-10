@@ -24,7 +24,10 @@ namespace _Project.Scripts.UI.BlocksStack
 
         private void OnDisable()
         {
-            GameController.Instance.OnGroupsCreated -= ShowTextEffect;
+            if (GameController.Instance != null)
+            {
+                GameController.Instance.OnGroupsCreated -= ShowTextEffect;
+            }
         }
 
         private void Update()

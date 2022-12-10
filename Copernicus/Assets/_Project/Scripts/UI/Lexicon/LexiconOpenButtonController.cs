@@ -11,6 +11,7 @@ namespace _Project.Scripts.UI
         private void OnEnable()
         {
             GameController.Instance.OnNewConstellationPlaced += ShowNotification;
+            SetNotificationActive(false);
         }
 
         private void OnDisable()
