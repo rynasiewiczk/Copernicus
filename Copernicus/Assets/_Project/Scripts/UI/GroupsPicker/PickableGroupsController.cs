@@ -2,6 +2,7 @@ namespace _Project.Scripts.UI
 {
     using System.Collections.Generic;
     using UnityEngine;
+    using Utils;
 
     public class PickableGroupsController : MonoBehaviour
     {
@@ -22,6 +23,7 @@ namespace _Project.Scripts.UI
 
         private void FillSlot(Group group)
         {
+            group.Root.ChangeLayerToDesk();
             foreach (var slot in _slots)
             {
                 if (slot.HasNotDroppedGroup)

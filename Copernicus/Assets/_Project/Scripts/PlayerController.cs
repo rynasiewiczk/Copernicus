@@ -5,6 +5,7 @@ namespace _Project.Scripts
     using LazySloth.Utilities;
     using Sirenix.OdinInspector;
     using UnityEngine;
+    using Utils;
 
     public class PlayerController : SingletonBehaviour<PlayerController>
     {
@@ -25,15 +26,16 @@ namespace _Project.Scripts
             }
 
             _currentDraggable = draggable;
+            _currentDraggable.Root.ChangeLayerToAboveDesk();
             return true;
         }
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                GameController.Instance.gameObject.SetActive(false);
-            }
+            // if (Input.GetKeyDown(KeyCode.A))
+            // {
+            //     GameController.Instance.gameObject.SetActive(false);
+            // }
             
             MoveGroupWithCursor();
 
@@ -77,6 +79,7 @@ namespace _Project.Scripts
                     BoardController.Instance.PutConstellationOnBoard(constellation);
                 }
 
+                _currentDraggable.Root.ChangeLayerToDefault();
                 _currentDraggable = null;
             }
         }
@@ -124,6 +127,7 @@ namespace _Project.Scripts
                 return;
             }
 
+            _currentDraggable.Root.ChangeLayerToDesk();
             _currentDraggable.ResetRotation();
             OnUnpickedDraggable?.Invoke(_currentDraggable);
             _currentDraggable = null;

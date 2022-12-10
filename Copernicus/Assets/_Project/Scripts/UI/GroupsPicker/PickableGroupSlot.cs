@@ -1,14 +1,11 @@
 namespace _Project.Scripts.UI
 {
     using System.Linq;
-    using LazySloth.Utilities;
     using Sirenix.OdinInspector;
     using UnityEngine;
-    using UnityEngine.EventSystems;
 
     public class PickableGroupSlot : MonoBehaviour
     {
-        [SerializeField] private Physics2dButton _button;
         [SerializeField] private Transform _container;
 
         [SerializeField] private float _offset = -.5f;
@@ -19,27 +16,19 @@ namespace _Project.Scripts.UI
 
         private void OnEnable()
         {
-            _button.OnClicked += TryPickUp;
             PlayerController.Instance.OnUnpickedDraggable += ResetGroupAsChild;
         }
 
         private void OnDisable()
         {
-            _button.OnClicked -= TryPickUp;
-
             if (PlayerController.Instance != null)
             {
                 PlayerController.Instance.OnUnpickedDraggable -= ResetGroupAsChild;
             }
         }
 
-        private void TryPickUp(PointerEventData eventData)
+        private void OnMouseDown()
         {
-            if (eventData.button != PointerEventData.InputButton.Left)
-            {
-                return;
-            }
-
             if (!HasNotDroppedGroup)
             {
                 return;
@@ -47,7 +36,7 @@ namespace _Project.Scripts.UI
 
             PlayerController.Instance.TryPickUpDraggable(Group);
         }
-        
+
         public void SetGroup(Group group)
         {
             Group = group;

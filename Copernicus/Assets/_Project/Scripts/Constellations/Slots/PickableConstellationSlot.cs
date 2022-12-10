@@ -1,12 +1,9 @@
 namespace _Project.Scripts.Constellations
 {
-    using LazySloth.Utilities;
     using UnityEngine;
-    using UnityEngine.EventSystems;
 
     public class PickableConstellationSlot : MonoBehaviour
     {
-        [SerializeField] private Physics2dButton _button;
         [SerializeField] private Transform _container;
 
         private Constellation _constellation;
@@ -15,27 +12,19 @@ namespace _Project.Scripts.Constellations
         
         private void OnEnable()
         {
-            _button.OnClicked += TryPickUp;
             PlayerController.Instance.OnUnpickedDraggable += ResetConstellationAsChild;
         }
         
         private void OnDisable()
         {
-            _button.OnClicked -= TryPickUp;
-
             if (PlayerController.Instance != null)
             {
                 PlayerController.Instance.OnUnpickedDraggable -= ResetConstellationAsChild;
             }
         }
-        
-        private void TryPickUp(PointerEventData eventData)
-        {
-            if (eventData.button != PointerEventData.InputButton.Left)
-            {
-                return;
-            }
 
+        private void OnMouseDown()
+        {
             if (!HasNotDroppedConstellation)
             {
                 return;
@@ -43,7 +32,7 @@ namespace _Project.Scripts.Constellations
 
             PlayerController.Instance.TryPickUpDraggable(_constellation);
         }
-        
+
         public void SetConstellation(Constellation constellation)
         {
             _constellation = constellation;

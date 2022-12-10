@@ -3,6 +3,7 @@ namespace _Project.Scripts.Constellations
     using System;
     using System.Collections.Generic;
     using UnityEngine;
+    using Utils;
 
     public class PickableConstellationsController : MonoBehaviour
     {
@@ -23,6 +24,7 @@ namespace _Project.Scripts.Constellations
 
         private void FillSlot(Constellation constellation)
         {
+            constellation.Root.ChangeLayerToDesk();
             foreach (var slot in _slots)
             {
                 if (slot.HasNotDroppedConstellation)

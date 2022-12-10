@@ -15,6 +15,7 @@ namespace _Project.Scripts
         [SerializeField] private Color _invalidPlaceColor;
         [SerializeField] private Color _validPlaceColor;
 
+        public Transform Root => gameObject.transform;
         public IReadOnlyList<Block> Blocks => _blocks;
         public bool IsOnMap => _blocks.Any(x => x.IsOnMap);
 
@@ -36,6 +37,16 @@ namespace _Project.Scripts
             }
         }
 
+        public void ChangeLayer(int newLayer)
+        {
+            var root = gameObject.transform;
+            var children = root.GetComponentsInChildren<Transform>(includeInactive: true);
+            foreach (var child in children)
+            {
+                child.gameObject.layer = newLayer;
+            }
+        }
+        
         public void RotateLeft() => transform.eulerAngles += new Vector3(0, 0, -90);
 
         public void RotateRight() => transform.eulerAngles += new Vector3(0, 0, 90);

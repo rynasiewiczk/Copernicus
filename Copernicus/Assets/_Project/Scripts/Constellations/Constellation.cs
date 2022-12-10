@@ -10,6 +10,7 @@ namespace _Project.Scripts.Constellations
         [SerializeField] private List<ConstellationPart> _parts;
         [SerializeField] private List<ConstellationConnection> _connections;
 
+        public Transform Root => gameObject.transform;
         public IReadOnlyList<ConstellationPart> Parts => _parts;
         public IReadOnlyList<ConstellationConnection> Connections => _connections;
         
