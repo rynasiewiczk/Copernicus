@@ -2,34 +2,27 @@ namespace _Project.Scripts
 {
     using System.Collections.Generic;
     using System.Linq;
+    using JetBrains.Annotations;
     using Sirenix.OdinInspector;
     using UnityEngine;
-    using UnityEngine.UI;
 
     public class UiGroup : MonoBehaviour
     {
-        [SerializeField] private Group _group;
-        [SerializeField] private Button _button;
+        private Group _group;
 
         [SerializeField] private List<UiBlock> _uiBlocks;
 
-        
         [SerializeField] private int _offset = 25;
-        
+
         public Group Group => _group;
 
         private RectTransform RectTransform => transform as RectTransform;
 
-        private void TryPickUpGroup()
-        {
-            //blocksDragger.TryPickUp(_group);
-        }
-
         [Button]
         public void SetupPosition()
         {
-            _uiBlocks = GetComponentsInChildren<UiBlock>().ToList();
-            
+            _uiBlocks = GetComponentsInChildren<UiBlock>(true).ToList();
+
             var rows = GetRowsCount();
             var columns = GetColumnsCount();
 
@@ -41,14 +34,42 @@ namespace _Project.Scripts
 
         private int GetRowsCount()
         {
-            var countX = _uiBlocks.Select(x => x.GetGridPosition().x).Distinct().Count();
+            var countX = _uiBlocks.Where(x => x.IsActive).Select(x => x.GetGridPosition().x).Distinct().Count();
             return countX;
         }
 
         private int GetColumnsCount()
         {
-            var countY = _uiBlocks.Select(x => x.GetGridPosition().y).Distinct().Count();
+            var countY = _uiBlocks.Where(x => x.IsActive).Select(x => x.GetGridPosition().y).Distinct().Count();
             return countY;
+        }
+
+        public void Initialize( Group group)
+        {
+            _group = group;
+
+            _uiBlocks.ForEach(x => x.SetActive(false));
+
+            foreach (var groupBlock in group.Blocks)
+            {
+                var pos = groupBlock.GetGridPosition();
+                var uiBlock = _uiBlocks.SingleOrDefault(x => x.GetGridPosition() == pos);
+                if (uiBlock == null)
+                {
+                    Debug.LogError($"There should be uiBlock at pos {pos}");
+                    continue;
+                }
+
+                uiBlock.SetActive(true);
+            }
+            
+            SetupPosition();
+        }
+
+        public void Reset()
+        {
+            _group = null;
+            _uiBlocks.ForEach(x => x.SetActive(false));
         }
     }
 }

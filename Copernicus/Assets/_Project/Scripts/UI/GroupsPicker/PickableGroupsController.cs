@@ -7,7 +7,6 @@ namespace _Project.Scripts.UI
     public class PickableGroupsController : MonoBehaviour
     {
         [SerializeField] private GroupsCatalog _groupsCatalog;
-
         [SerializeField] private List<PickableGroupSlot> _slots;
 
         private void Start()
@@ -24,7 +23,7 @@ namespace _Project.Scripts.UI
                 {
                     if (!slot.HasGroup)
                     {
-                        var group = _groupsCatalog.GetRandomUiGroup();
+                        var group = _groupsCatalog.GetRandomGroup();
                         var instance = Instantiate(group);
                         slot.SetGroup(instance);
                     }
