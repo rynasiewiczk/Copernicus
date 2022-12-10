@@ -14,8 +14,10 @@ namespace _Project.Scripts
         [SerializeField] private Color _defaultColor;
         [SerializeField] private Color _invalidPlaceColor;
         [SerializeField] private Color _validPlaceColor;
-        
+
         private float _rotationDuration = .15f;
+        private float _dropOnMapDuration = .15f;
+        private float _bumpDuration = .2f;
 
         public Transform Root => gameObject.transform;
         public IReadOnlyList<Block> Blocks => _blocks;
@@ -32,10 +34,14 @@ namespace _Project.Scripts
 
         public void DropOnMap()
         {
+            var reason = new InteractionIgnoreReason("Placing block");
+            GameController.Instance.InteractionIgnoreReasons.Add(reason);
+            DOVirtual.DelayedCall(_dropOnMapDuration, () => GameController.Instance.InteractionIgnoreReasons.Remove(reason));
+
             foreach (var block in _blocks)
             {
                 block.SetColor(_defaultColor);
-                block.DropOnMap();
+                block.DropOnMap(_dropOnMapDuration);
             }
         }
 
@@ -80,7 +86,6 @@ namespace _Project.Scripts
         public void SetParent(Transform parent)
         {
             transform.SetParent(parent, false);
-            transform.localPosition = Vector3.zero;
         }
 
         public void ResetColor() => _blocks.ForEach(x => x.SetColor(_defaultColor));
@@ -89,7 +94,12 @@ namespace _Project.Scripts
         {
             transform.position = position;
         }
-
+        
+        public void SetLocalPosition(Vector3 position)
+        {
+            transform.localPosition = position;
+        }
+        
         public void SetOverBoardValidPositionView(bool canPutOnBoard)
         {
             foreach (var block in _blocks)
@@ -100,6 +110,13 @@ namespace _Project.Scripts
 
         public void SetActive(bool active) => gameObject.SetActive(active);
 
+        public void PlayBump()
+        {
+            var reason = new InteractionIgnoreReason("Group bump");
+            GameController.Instance.InteractionIgnoreReasons.Add(reason);
+            transform.DOPunchScale(Vector3.one * 0.1f, _bumpDuration).OnComplete(() => GameController.Instance.InteractionIgnoreReasons.Remove(reason));
+        }
+        
         ///////////
 
         [Button]

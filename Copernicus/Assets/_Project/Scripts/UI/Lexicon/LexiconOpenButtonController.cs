@@ -4,7 +4,7 @@ namespace _Project.Scripts.UI
 
     public class LexiconOpenButtonController : MonoBehaviour
     {
-        private void OnMouseDown()
+        private void OnMouseUpAsButton()
         {
             OpenLexicon();
         }

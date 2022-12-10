@@ -1,5 +1,6 @@
 namespace _Project.Scripts
 {
+    using DG.Tweening;
     using Sirenix.OdinInspector;
     using UnityEngine;
 
@@ -30,11 +31,18 @@ namespace _Project.Scripts
             var y = Mathf.RoundToInt(transform.position.y);
             return new Vector2Int(x, y);
         }
+        
+        public Vector2Int GetLocalGridPosition()
+        {
+            var x = Mathf.RoundToInt(transform.localPosition.x);
+            var y = Mathf.RoundToInt(transform.localPosition.y);
+            return new Vector2Int(x, y);
+        }
 
-        public void DropOnMap()
+        public void DropOnMap(float duration)
         {
             var gridPosition = GetGridPosition();
-            transform.position = new Vector2(gridPosition.x, gridPosition.y);
+            transform.DOMove(new Vector2(gridPosition.x, gridPosition.y), duration);
             IsOnMap = true;
         }
 
