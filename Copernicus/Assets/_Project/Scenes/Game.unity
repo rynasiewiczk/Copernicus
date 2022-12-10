@@ -3539,7 +3539,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: 9706ae523b8db44fd8c49c877b38e7c6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.078431375}
+  m_Color: {r: 0.03529412, g: 0.6313726, b: 1, a: 0.23529412}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
@@ -4569,6 +4569,22 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 8660036037514152559, guid: 1c5bee7e1c3a34c11b3f22f53f31516a, type: 2}
+    - target: {fileID: 4495443446949399692, guid: e5af51282d2ba4b67bc3d3e28cccb1c5, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.7833151
+      objectReference: {fileID: 0}
+    - target: {fileID: 4495443446949399692, guid: e5af51282d2ba4b67bc3d3e28cccb1c5, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7833151
+      objectReference: {fileID: 0}
+    - target: {fileID: 4495443446949399692, guid: e5af51282d2ba4b67bc3d3e28cccb1c5, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.7833151
+      objectReference: {fileID: 0}
+    - target: {fileID: 4495443446949399692, guid: e5af51282d2ba4b67bc3d3e28cccb1c5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.148
+      objectReference: {fileID: 0}
     - target: {fileID: 5243994377846411172, guid: e5af51282d2ba4b67bc3d3e28cccb1c5, type: 3}
       propertyPath: m_fontAsset
       value: 
