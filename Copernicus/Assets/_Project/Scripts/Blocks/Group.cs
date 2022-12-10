@@ -57,7 +57,7 @@ namespace _Project.Scripts
 
         public void DropOnMap(bool silent = false)
         {
-            if(!silent) { AudioManager.instance.Play("epic-object-placing-105779"); }
+            if(!silent) { AudioManager.instance.Play("group_fit"); }
             var reason = new InteractionIgnoreReason("Placing block");
             GameController.Instance.InteractionIgnoreReasons.Add(reason);
             DOVirtual.DelayedCall(_dropOnMapDuration, () => GameController.Instance.InteractionIgnoreReasons.Remove(reason));
@@ -81,6 +81,8 @@ namespace _Project.Scripts
 
         public void RotateLeft()
         {
+            AudioManager.instance.Play("group_rotation");
+
             var interactionIgnoreReason = new InteractionIgnoreReason("Rotating group");
             GameController.Instance.InteractionIgnoreReasons.Add(interactionIgnoreReason);
             transform.DORotate(new Vector3(0, 0, -90), _rotationDuration, RotateMode.WorldAxisAdd).OnComplete(() =>
@@ -91,6 +93,8 @@ namespace _Project.Scripts
 
         public void RotateRight()
         {
+             AudioManager.instance.Play("group_rotation");
+
             var interactionIgnoreReason = new InteractionIgnoreReason("Rotating group");
             GameController.Instance.InteractionIgnoreReasons.Add(interactionIgnoreReason);
             transform.DORotate(new Vector3(0, 0, 90), _rotationDuration, RotateMode.WorldAxisAdd).OnComplete(() =>
