@@ -99,8 +99,10 @@ namespace _Project.Scripts
         
         public void PutConstellationOnBoard(Constellation constellation)
         {
-            //todo: [kris] -> tu trzeba dodać kładzenie konstelacji 
-            //łączenie gwiazdek we wzór, animacja rysunku konstelacji itp
+            //todo: [kris] -> łączenie gwiazdek we wzór, pojawienie się konstelacji, itp
+            //trzeba też dodać jakis view dla konstelacji, póki co mają tylko gizmos
+            //zauważyłem też że kładąc cos mozna tym samym kliknieciem podniesc cos innego (ale nie wiem czy to problem na ten moment)
+            //jak ci sie chce to mozesz art pododawac :)
             
             MarkStarsAsUsed();
             constellation.SetAsDroppedOnBoard();

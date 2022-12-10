@@ -15,6 +15,29 @@ namespace _Project.Scripts.Constellations
         
         public bool IsDroppedOnBoard { get; private set; }
 
+        public void SetWorldPosition(Vector3 position)
+        {
+            transform.position = position;
+        }
+
+        public void ResetRotation()
+        {
+            transform.eulerAngles = Vector3.zero;
+        }
+
+        public void SetActive(bool active)
+        {
+            gameObject.SetActive(active);
+        }
+
+        public void SetParent(Transform container)
+        {
+            transform.SetParent(container, false);
+            transform.localPosition = Vector3.zero;
+        }
+
+        public void SetAsDroppedOnBoard() => IsDroppedOnBoard = true;
+        
         [Button]
         public void Setup()
         {
@@ -40,29 +63,6 @@ namespace _Project.Scripts.Constellations
                 Gizmos.DrawLine(connection.First.transform.position, connection.Second.transform.position);
             }
         }
-
-        public void SetWorldPosition(Vector3 position)
-        {
-            transform.position = position;
-        }
-
-        public void ResetRotation()
-        {
-            transform.eulerAngles = Vector3.zero;
-        }
-
-        public void SetActive(bool active)
-        {
-            gameObject.SetActive(active);
-        }
-
-        public void SetParent(Transform container)
-        {
-            transform.SetParent(container, false);
-            transform.localPosition = Vector3.zero;
-        }
-
-        public void SetAsDroppedOnBoard() => IsDroppedOnBoard = true;
     }
 
     [Serializable]
