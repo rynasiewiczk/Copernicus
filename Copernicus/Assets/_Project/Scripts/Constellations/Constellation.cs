@@ -2,10 +2,12 @@ namespace _Project.Scripts.Constellations
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using CarterGames.Assets.AudioManager;
     using DG.Tweening;
     using Effects;
     using LazySloth.Observable;
+    using LazySloth.Utilities;
     using Sirenix.OdinInspector;
     using Unity.VisualScripting;
     using UnityEngine;
@@ -17,6 +19,7 @@ namespace _Project.Scripts.Constellations
         [SerializeField] private List<ConstellationConnection> _connections;
         [SerializeField] private List<LineRenderer> _lines;
         [SerializeField] private LineRenderer _linePrefab;
+        [SerializeField] private SpriteRenderer _glow;
 
         [SerializeField] private Sprite _icon;
         [SerializeField] private string _name;
@@ -25,8 +28,16 @@ namespace _Project.Scripts.Constellations
         [SerializeField] private float _fadeOutDuration = .3f;
         [SerializeField] private LineRendererConnection _droppedConnectionLinePrefab;
 
+        [SerializeField] private int _requiredConstellationsToEnable;
+
+        [SerializeField] private AnimationCurve _glowCurve;
+        [SerializeField] private float _glowSpeed = 2;
+        [SerializeField] private float _glowDuration = 1;
+
         private int _prevValidParts;
-        
+        private bool _isGlowing;
+        private float _glowStartTime;
+
         public Sprite Icon => _icon;
         public string Name => _name;
         public string Description => _description;
@@ -38,10 +49,36 @@ namespace _Project.Scripts.Constellations
         public IReadOnlyList<ConstellationConnection> Connections => _connections;
 
         public bool IsDroppedOnBoard { get; private set; }
+        public int RequiredConstellationsToEnable => _requiredConstellationsToEnable;
 
         private void OnEnable()
         {
             ResetPartsState();
+        }
+
+        private void Update()
+        {
+            if (_parts.All(x => x.IsValid) && IsDragged.Value)
+            {
+                if (!_isGlowing)
+                {
+                    _isGlowing = true;
+                    _glowStartTime = Time.time;
+                }
+
+                var value = ((Time.time - _glowStartTime) * _glowSpeed) % _glowDuration;
+                var lerped = _glowCurve.Evaluate(value);
+                _glow.color = _glow.color.SetAlpha(lerped);
+            }
+            else
+            {
+                if (_isGlowing)
+                {
+                    _isGlowing = false;
+
+                    _glow.DOFade(0, .1f);
+                }
+            }
         }
 
         public void SetWorldPosition(Vector3 position)
@@ -81,7 +118,7 @@ namespace _Project.Scripts.Constellations
             IsDroppedOnBoard = true;
 
             var playingSource = AudioManager.instance.PlayAndGetSource("constellation_1");
-            AudioManager.instance.PlayWithDelay("constellation_2", playingSource.clip.length/3);
+            AudioManager.instance.PlayWithDelay("constellation_2", playingSource.clip.length / 3);
         }
 
         public void RefreshPartsState(List<ConstellationPart> validParts)
@@ -92,7 +129,7 @@ namespace _Project.Scripts.Constellations
             }
 
             _prevValidParts = validParts.Count;
-            
+
             foreach (var part in _parts)
             {
                 part.SetValid(validParts.Contains(part));

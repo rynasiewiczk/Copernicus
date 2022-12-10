@@ -647,6 +647,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Constellation_Aquarius
       objectReference: {fileID: 0}
+    - target: {fileID: 8817663908967596556, guid: 1a5d44005bb2e40399cf95a95f40d51d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.89393
+      objectReference: {fileID: 0}
+    - target: {fileID: 8817663908967596556, guid: 1a5d44005bb2e40399cf95a95f40d51d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.89393
+      objectReference: {fileID: 0}
+    - target: {fileID: 8817663908967596556, guid: 1a5d44005bb2e40399cf95a95f40d51d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.89393
+      objectReference: {fileID: 0}
+    - target: {fileID: 8817663908967596556, guid: 1a5d44005bb2e40399cf95a95f40d51d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.004
+      objectReference: {fileID: 0}
+    - target: {fileID: 8817663908967596556, guid: 1a5d44005bb2e40399cf95a95f40d51d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.017
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
