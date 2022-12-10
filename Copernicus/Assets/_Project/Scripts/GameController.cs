@@ -6,6 +6,7 @@ namespace _Project.Scripts
     using Constellations;
     using DG.Tweening;
     using UnityEngine;
+    using UnityEngine.SceneManagement;
     using Random = UnityEngine.Random;
 
     public class GameController : SingletonBehaviour<GameController>
@@ -16,6 +17,8 @@ namespace _Project.Scripts
         public event Action<Constellation> OnConstellationShowing;
 
         [SerializeField] private Transform _deskRoot;
+        [SerializeField] private SpriteRenderer _grid;
+        [SerializeField] private CanvasGroup _gameOverUi;
 
         [Header("Groups")]
         [SerializeField] private GroupsCatalog _groupsCatalog;
@@ -37,6 +40,9 @@ namespace _Project.Scripts
 
         public List<InteractionIgnoreReason> InteractionIgnoreReasons = new();
         public bool HasInteractionIgnoreReason => InteractionIgnoreReasons.Any();
+
+        private float _gameOverTime;
+        private bool _isGameOver;
 
         private void Start() //start game
         {
@@ -127,6 +133,18 @@ namespace _Project.Scripts
             }
         }
 
+        private void Update()
+        {
+            if(!_isGameOver) { return; }
+            if(Time.time - _gameOverTime < 2f) { return; }
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                _isGameOver = false;
+                SceneManager.LoadScene(0);
+            }
+        }
+
         private void CheckForGameOver()
         {
             if(_groupsToShow.Any()) { return; }
@@ -146,6 +164,17 @@ namespace _Project.Scripts
             CameraController.Instance.ShowEndSequence(center, xExtend, yExtend);
 
             _deskRoot.DOScale(100f, 20f);
+            _grid.DOFade(0f, 1f);
+            
+            _isGameOver = true;
+            _gameOverTime = Time.time;
+
+            foreach (var block in BoardController.Instance.BlocksOnBoard)
+            {
+                block.Hide();
+            }
+
+            _gameOverUi.DOFade(1f, 3f).SetDelay(1f);
         }
     }
 }
