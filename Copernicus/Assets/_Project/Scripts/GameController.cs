@@ -25,8 +25,10 @@ namespace _Project.Scripts
         private readonly List<Group> _groupsToShow = new();
 
         private readonly List<Constellation> _currentConstellations = new();
+        private readonly List<Constellation> _droppedConstellations = new();
 
         public int GroupsQueueCount => _groupsQueue.Count;
+        public IReadOnlyList<Constellation> DroppedConstellations => _droppedConstellations;
 
         private void Start() //start game
         {
@@ -45,6 +47,7 @@ namespace _Project.Scripts
         public void PutConstellationOnMap(Constellation constellation)
         {
             _currentConstellations.Remove(constellation);
+            _droppedConstellations.Add(constellation);
             CreateGroups(2); //todo: define based on constellations
             FillUpGroupsToShow();
             FillUpConstellations();
