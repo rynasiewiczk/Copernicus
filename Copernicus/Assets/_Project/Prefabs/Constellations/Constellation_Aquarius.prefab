@@ -559,17 +559,17 @@ PrefabInstance:
     - target: {fileID: 5534661543418241272, guid: 1a5d44005bb2e40399cf95a95f40d51d, type: 3}
       propertyPath: _icon
       value: 
-      objectReference: {fileID: 21300000, guid: 2429dea89d23a484e915199f7caab66d, type: 3}
+      objectReference: {fileID: 21300000, guid: 5f770ade2bcd14b7a8badac67d84556a, type: 3}
     - target: {fileID: 5534661543418241272, guid: 1a5d44005bb2e40399cf95a95f40d51d, type: 3}
       propertyPath: _name
-      value: Aquarius
+      value: Wodnik
       objectReference: {fileID: 0}
     - target: {fileID: 5534661543418241272, guid: 1a5d44005bb2e40399cf95a95f40d51d, type: 3}
       propertyPath: _description
-      value: Aquarius is a winter constellation in the northern hemisphere, found
-        near Pisces and Cetus. It is especially notable as the radiant for four meteor
-        showers, the largest of which is the Southern Delta Aquariids in late July
-        and early August.
+      value: "Na mezopotamskich tabliczkach mo\u017Cna dopatrzy\u0107 si\u0119 wizerunku
+        Wodnika, przedstawianego jako kl\u0119cz\u0105cy m\u0119\u017Cczyzna. Z przewieszonego
+        przez rami\u0119 wiadra wylewa wod\u0119, zawsze w kierunku gwiazdozbioru
+        Ryby Po\u0142udniowej."
       objectReference: {fileID: 0}
     - target: {fileID: 5534661543418241272, guid: 1a5d44005bb2e40399cf95a95f40d51d, type: 3}
       propertyPath: _lines.Array.size

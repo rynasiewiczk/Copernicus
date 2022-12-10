@@ -559,17 +559,17 @@ PrefabInstance:
     - target: {fileID: 5534661543418241272, guid: 1a5d44005bb2e40399cf95a95f40d51d, type: 3}
       propertyPath: _icon
       value: 
-      objectReference: {fileID: 21300000, guid: 2429dea89d23a484e915199f7caab66d, type: 3}
+      objectReference: {fileID: 21300000, guid: fd6452871674b4fb89115a218db0b5c9, type: 3}
     - target: {fileID: 5534661543418241272, guid: 1a5d44005bb2e40399cf95a95f40d51d, type: 3}
       propertyPath: _name
-      value: Capricorn
+      value: "Kozioro\u017Cec"
       objectReference: {fileID: 0}
     - target: {fileID: 5534661543418241272, guid: 1a5d44005bb2e40399cf95a95f40d51d, type: 3}
       propertyPath: _description
-      value: 'Capricorn is symbolized by the sea goat, a mythological creature with
-        the body of a goat and tail of a fish. This imagery speaks to Capricorn''s
-        bifurcated abilities: Capricorns are skilled at navigating both the material
-        and emotional realms.'
+      value: "Kozioro\u017Cec jest symbolizowany przez koz\u0119 morsk\u0105, mitologiczne
+        stworzenie o ciele kozy i rybim ogonie. Ten obraz m\xF3wi o dwojakich zdolno\u015Bciach
+        Kozioro\u017Cca: potrafi\u0105 porusza\u0107 si\u0119 zar\xF3wno po sferze
+        materialnej, jak i emocjonalnej."
       objectReference: {fileID: 0}
     - target: {fileID: 5534661543418241272, guid: 1a5d44005bb2e40399cf95a95f40d51d, type: 3}
       propertyPath: _lines.Array.size
