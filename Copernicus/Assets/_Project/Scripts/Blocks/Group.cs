@@ -7,7 +7,7 @@ namespace _Project.Scripts
     using Sirenix.OdinInspector;
     using UnityEngine;
 
-    public class Group : MonoBehaviour
+    public class Group : MonoBehaviour, IDraggable
     {
         [SerializeField] private List<Block> _blocks;
 

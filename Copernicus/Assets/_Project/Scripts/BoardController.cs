@@ -96,6 +96,42 @@ namespace _Project.Scripts
 
             return true;
         }
+        
+        public void PutConstellationOnBoard(Constellation constellation)
+        {
+            //todo: [kris] -> tu trzeba dodać kładzenie konstelacji 
+            //łączenie gwiazdek we wzór, animacja rysunku konstelacji itp
+            
+            MarkStarsAsUsed();
+            constellation.SetAsDroppedOnBoard();
+            
+            GameController.Instance.PutConstellationOnMap(constellation);
+
+            void MarkStarsAsUsed()
+            {
+                foreach (var constellationPart in constellation.Parts)
+                {
+                    if (TryGetBlockAtPosition(constellationPart.GetGridPosition(), out var blockOnMap))
+                    {
+                        if (!blockOnMap.HasStar)
+                        {
+                            Debug.LogError($"There should be a star at pos {constellationPart.GetGridPosition()}");
+                        }
+
+                        if (blockOnMap.HasStar && blockOnMap.BlockStar.IsAlreadyUsed)
+                        {
+                            Debug.LogError($"A star at pos is already used. Pos: {constellationPart.GetGridPosition()}");
+                        }
+
+                        blockOnMap.BlockStar.MarkUsed();
+                    }
+                    else
+                    {
+                        Debug.LogError($"There should be a block at pos: {constellationPart.GetGridPosition()}");
+                    }
+                }
+            }
+        }
 
         private bool TryGetBlockAtPosition(Vector2Int gridPosition, out Block block)
         {

@@ -19,20 +19,35 @@ namespace _Project.Scripts.UI
 
         private void OnEnable()
         {
-            _button.OnClicked += TryPickUpGroup;
-            PlayerController.Instance.OnUnpickedGroup += ResetGroupAsChild;
+            _button.OnClicked += TryPickUp;
+            PlayerController.Instance.OnUnpickedDraggable += ResetGroupAsChild;
         }
 
         private void OnDisable()
         {
-            _button.OnClicked -= TryPickUpGroup;
+            _button.OnClicked -= TryPickUp;
 
             if (PlayerController.Instance != null)
             {
-                PlayerController.Instance.OnUnpickedGroup -= ResetGroupAsChild;
+                PlayerController.Instance.OnUnpickedDraggable -= ResetGroupAsChild;
             }
         }
 
+        private void TryPickUp(PointerEventData eventData)
+        {
+            if (eventData.button != PointerEventData.InputButton.Left)
+            {
+                return;
+            }
+
+            if (!HasNotDroppedGroup)
+            {
+                return;
+            }
+
+            PlayerController.Instance.TryPickUpDraggable(Group);
+        }
+        
         public void SetGroup(Group group)
         {
             Group = group;
@@ -40,14 +55,20 @@ namespace _Project.Scripts.UI
             ResetGroupAsChild(Group);
         }
 
-        private void ResetGroupAsChild(Group _)
+        private void ResetGroupAsChild(IDraggable draggable)
         {
             if (Group == null)
             {
                 Debug.LogError("Group is null");
                 return;
             }
-            
+
+            if (draggable is not Group group || Group != group)
+            {
+                //not my group, ignoring
+                return;
+            }
+
             Group.SetParent(_container);
             CenterGroup();
             Group.ResetColor();
@@ -66,26 +87,6 @@ namespace _Project.Scripts.UI
             var xOffset = groupSizeX % 2 == 0 ? _offset : 0;
             var yOffset = groupSizeY % 2 == 0 ? _offset : 0;
             Group.SetWorldPosition(Group.transform.position + new Vector3(xOffset, yOffset, 0));
-        }
-
-        public void Clear()
-        {
-            Group = null;
-        }
-
-        private void TryPickUpGroup(PointerEventData eventData)
-        {
-            if (eventData.button != PointerEventData.InputButton.Left)
-            {
-                return;
-            }
-            
-            if (!HasNotDroppedGroup)
-            {
-                return;
-            }
-            
-            PlayerController.Instance.TryPickUpGroup(Group);
         }
 
         //debug

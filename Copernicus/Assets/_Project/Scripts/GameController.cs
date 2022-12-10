@@ -9,7 +9,8 @@ namespace _Project.Scripts
 
     public class GameController : SingletonBehaviour<GameController>
     {
-        public event Action<Group> OnGroupShowing; 
+        public event Action<Group> OnGroupShowing;
+        public event Action<Constellation> OnConstellationShowing; 
 
         [Header("Groups")]
         [SerializeField] private GroupsCatalog _groupsCatalog;
@@ -60,11 +61,10 @@ namespace _Project.Scripts
                     _groupsToShow.Add(group);
                     
                     OnGroupShowing?.Invoke(group);
-                    ////refresh ui?
                 }
             }
         }
-
+        
         private void FillUpConstellations()
         {
             var missingConstellations = _maxConstellations - _currentConstellations.Count;
@@ -73,6 +73,8 @@ namespace _Project.Scripts
                 var constellation = _constellationsCatalog.GetRandomConstellation();
                 var newConstellation = Instantiate(constellation);
                 _currentConstellations.Add(newConstellation);
+                
+                OnConstellationShowing?.Invoke(newConstellation);
             }
         }
         

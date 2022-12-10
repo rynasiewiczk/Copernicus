@@ -5,7 +5,6 @@ namespace _Project.Scripts.UI
 
     public class PickableGroupsController : MonoBehaviour
     {
-        [SerializeField] private GroupsCatalog _groupsCatalog;
         [SerializeField] private List<PickableGroupSlot> _slots;
 
         private void Awake()

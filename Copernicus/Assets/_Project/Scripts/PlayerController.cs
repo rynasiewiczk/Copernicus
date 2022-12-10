@@ -1,34 +1,40 @@
 namespace _Project.Scripts
 {
     using System;
+    using Constellations;
     using LazySloth.Utilities;
     using Sirenix.OdinInspector;
     using UnityEngine;
 
     public class PlayerController : SingletonBehaviour<PlayerController>
     {
-        public event Action<Group> OnUnpickedGroup;
+        public event Action<IDraggable> OnUnpickedDraggable;
 
         [SerializeField] private Camera _gameplayCamera;
 
-        private Group _currentGroup;
+        private IDraggable _currentDraggable;
 
-        public Group CurrentGroup => _currentGroup;
-        public bool HasGroup => CurrentGroup != null;
+        public IDraggable CurrentDraggable => _currentDraggable;
+        public bool HasDraggable => CurrentDraggable != null;
 
-        public bool TryPickUpGroup(Group group)
+        public bool TryPickUpDraggable(IDraggable draggable)
         {
-            if (HasGroup)
+            if (HasDraggable)
             {
                 return false;
             }
 
-            _currentGroup = group;
+            _currentDraggable = draggable;
             return true;
         }
 
         private void Update()
         {
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                GameController.Instance.gameObject.SetActive(false);
+            }
+            
             MoveGroupWithCursor();
 
             CheckIfCanPutOnBoard();
@@ -43,13 +49,16 @@ namespace _Project.Scripts
                 Unpick();
             }
 
-            else if (Input.GetKeyDown(KeyCode.Q))
+            else if (_currentDraggable is Group group)
             {
-                TryRotateLeft();
-            }
-            else if (Input.GetKeyDown(KeyCode.E))
-            {
-                TryRotateRight();
+                if (Input.GetKeyDown(KeyCode.Q))
+                {
+                    TryRotateLeft(group);
+                }
+                else if (Input.GetKeyDown(KeyCode.E))
+                {
+                    TryRotateRight(group);
+                }
             }
         }
 
@@ -58,66 +67,76 @@ namespace _Project.Scripts
             var canPutOnBoard = CheckIfCanPutOnBoard();
             if (canPutOnBoard)
             {
-                BoardController.Instance.PutGroupOnBoard(_currentGroup);
-                _currentGroup = null;
+                if (_currentDraggable is Group group)
+                {
+                    BoardController.Instance.PutGroupOnBoard(group);
+                }
+
+                if (_currentDraggable is Constellation constellation)
+                {
+                    BoardController.Instance.PutConstellationOnBoard(constellation);
+                }
+
+                _currentDraggable = null;
             }
         }
 
         private bool CheckIfCanPutOnBoard()
         {
-            if (_currentGroup == null)
+            if (_currentDraggable == null)
             {
                 return false;
             }
 
-            var canPutOnBoard = BoardController.Instance.IsPositionValidForGroup(_currentGroup);
-            _currentGroup.SetOverBoardValidPositionView(canPutOnBoard);
-            return canPutOnBoard;
+            if (_currentDraggable is Group group)
+            {
+                var canPutOnBoard = BoardController.Instance.IsPositionValidForGroup(group);
+                group.SetOverBoardValidPositionView(canPutOnBoard);
+                return canPutOnBoard;
+            }
+
+            if (_currentDraggable is Constellation constellation)
+            {
+                var canPutOnBoard = BoardController.Instance.IsPositionValidForConstellation(constellation);
+                return canPutOnBoard;
+            }
+
+            return false;
         }
 
         private void MoveGroupWithCursor()
         {
-            if (_currentGroup == null)
+            if (_currentDraggable == null)
             {
                 return;
             }
 
             var mousePosition = Input.mousePosition;
             var worldPosition = _gameplayCamera.ScreenToWorldPoint(mousePosition).SetZ(0);
-            _currentGroup.SetWorldPosition(worldPosition);
+            _currentDraggable.SetWorldPosition(worldPosition);
         }
 
         [Button]
         public void Unpick()
         {
-            if (_currentGroup == null)
+            if (_currentDraggable == null)
             {
                 return;
             }
 
-            _currentGroup.ResetRotation();
-            OnUnpickedGroup?.Invoke(_currentGroup);
-            _currentGroup = null;
+            _currentDraggable.ResetRotation();
+            OnUnpickedDraggable?.Invoke(_currentDraggable);
+            _currentDraggable = null;
         }
 
-        private void TryRotateLeft()
+        private void TryRotateLeft(Group group)
         {
-            if (_currentGroup == null)
-            {
-                return;
-            }
-
-            _currentGroup.RotateLeft();
+            group.RotateLeft();
         }
 
-        private void TryRotateRight()
+        private void TryRotateRight(Group group)
         {
-            if (_currentGroup == null)
-            {
-                return;
-            }
-
-            _currentGroup.RotateRight();
+            group.RotateRight();
         }
     }
 }

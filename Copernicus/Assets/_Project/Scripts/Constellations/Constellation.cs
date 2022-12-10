@@ -5,13 +5,15 @@ namespace _Project.Scripts.Constellations
     using Sirenix.OdinInspector;
     using UnityEngine;
 
-    public class Constellation : MonoBehaviour
+    public class Constellation : MonoBehaviour, IDraggable
     {
         [SerializeField] private List<ConstellationPart> _parts;
         [SerializeField] private List<ConstellationConnection> _connections;
 
         public IReadOnlyList<ConstellationPart> Parts => _parts;
         public IReadOnlyList<ConstellationConnection> Connections => _connections;
+        
+        public bool IsDroppedOnBoard { get; private set; }
 
         [Button]
         public void Setup()
@@ -38,6 +40,29 @@ namespace _Project.Scripts.Constellations
                 Gizmos.DrawLine(connection.First.transform.position, connection.Second.transform.position);
             }
         }
+
+        public void SetWorldPosition(Vector3 position)
+        {
+            transform.position = position;
+        }
+
+        public void ResetRotation()
+        {
+            transform.eulerAngles = Vector3.zero;
+        }
+
+        public void SetActive(bool active)
+        {
+            gameObject.SetActive(active);
+        }
+
+        public void SetParent(Transform container)
+        {
+            transform.SetParent(container, false);
+            transform.localPosition = Vector3.zero;
+        }
+
+        public void SetAsDroppedOnBoard() => IsDroppedOnBoard = true;
     }
 
     [Serializable]
