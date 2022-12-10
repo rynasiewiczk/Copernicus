@@ -11,6 +11,7 @@ namespace _Project.Scripts
         [SerializeField] private List<Block> _blocks;
 
         public IReadOnlyList<Block> Blocks => _blocks;
+        public bool IsOnMap => _blocks.Any(x => x.IsOnMap);
 
         public void Init(int numberOfStars)
         {
@@ -51,6 +52,19 @@ namespace _Project.Scripts
             {
                 block.Validate();
             }
+        }
+
+        public void SetActive(bool active) => gameObject.SetActive(active);
+
+        public void SetParent(Transform parent)
+        {
+            transform.SetParent(parent, false);
+            transform.localPosition = Vector3.zero;
+        }
+
+        public void SetWorldPosition(Vector3 position)
+        {
+            transform.position = position;
         }
     }
 }

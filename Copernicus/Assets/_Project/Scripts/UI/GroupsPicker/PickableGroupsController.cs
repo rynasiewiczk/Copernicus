@@ -1,13 +1,13 @@
 namespace _Project.Scripts.UI
 {
     using System.Collections.Generic;
+    using LazySloth.Utilities;
     using Sirenix.OdinInspector;
     using UnityEngine;
 
     public class PickableGroupsController : MonoBehaviour
     {
         [SerializeField] private GroupsCatalog _groupsCatalog;
-
         [SerializeField] private List<PickableGroupSlot> _slots;
 
         private void Start()
@@ -24,7 +24,7 @@ namespace _Project.Scripts.UI
                 {
                     if (!slot.HasGroup)
                     {
-                        var group = _groupsCatalog.GetRandomUiGroup();
+                        var group = _groupsCatalog.GetRandomGroup();
                         var instance = Instantiate(group);
                         slot.SetGroup(instance);
                     }
@@ -48,6 +48,13 @@ namespace _Project.Scripts.UI
                     slot.Clear();
                 }
             }
+        }
+        
+        //debug
+        [Button]
+        private void DestroyGroups()
+        {
+            _slots.ForEach(x => x.DestroyGroup());
         }
     }
 }

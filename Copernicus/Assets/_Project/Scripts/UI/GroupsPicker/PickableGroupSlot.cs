@@ -1,55 +1,69 @@
 namespace _Project.Scripts.UI
 {
-    using System;
+    using LazySloth.Utilities;
+    using Sirenix.OdinInspector;
     using UnityEngine;
-    using UnityEngine.UI;
 
     public class PickableGroupSlot : MonoBehaviour
     {
-        [SerializeField] private Button _button;
-        [SerializeField] private RectTransform _container;
-        
-        public UiGroup UiGroup { get; private set; }
+        [SerializeField] private Physics2dButton _button;
+        [SerializeField] private Transform _container;
 
-        public bool HasGroup => UiGroup != null;
+        public Group Group { get; private set; }
+
+        public bool HasGroup => Group != null;
 
         private void OnEnable()
         {
-            _button.onClick.AddListener(TryPickUpGroup);
+            _button.OnClicked += TryPickUpGroup;
+            PlayerController.Instance.OnUnpickedGroup += ResetGroupAsChild;
         }
 
         private void OnDisable()
         {
-            _button.onClick.RemoveListener(TryPickUpGroup);
+            _button.OnClicked -= TryPickUpGroup;
+            PlayerController.Instance.OnUnpickedGroup -= ResetGroupAsChild;
+        }
+
+        public void SetGroup(Group group)
+        {
+            Group = group;
+            ResetGroupAsChild(Group);
+        }
+
+        private void ResetGroupAsChild(Group _)
+        {
+            if (Group == null)
+            {
+                Debug.LogError("Group is null");
+                return;
+            }
+            
+            Group.SetParent(_container);
+        }
+        
+        public void Clear()
+        {
+            Group = null;
         }
 
         private void TryPickUpGroup()
         {
-            Debug.Log($"<color=green>try pick up {UiGroup.name}</color>");
-        }
-
-        public void SetGroup(UiGroup group)
-        {
-            UiGroup = group;
-            UiGroup.transform.SetParent(_container, false);
-        }
-
-        public bool TryGetGroup(out Group group)
-        {
-            if (HasGroup)
+            var didPickUp = PlayerController.Instance.TryPickUpGroup(Group);
+            if (didPickUp)
             {
-                group = UiGroup.Group;
-                return true;
+                //HideGroup();
             }
-
-            group = null;
-            return false;
         }
 
-        public void Clear()
+        //debug
+        [Button]
+        public void DestroyGroup()
         {
-            Destroy(UiGroup.gameObject);
-            UiGroup = null;
+            if (Group != null)
+            {
+                Destroy(Group.gameObject);
+            }
         }
     }
 }

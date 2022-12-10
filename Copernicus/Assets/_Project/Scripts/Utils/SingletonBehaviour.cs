@@ -2,18 +2,18 @@ using UnityEngine;
 
 public class SingletonBehaviour<T> : MonoBehaviour where T: SingletonBehaviour<T>
 {
-    public static T instance { get; protected set; }
-    
-    void Awake()
+    private static T instance;
+
+    public static T Instance
     {
-        if (instance != null && instance != this)
+        get
         {
-            Destroy(this);
-            throw new System.Exception("An instance of this singleton already exists.");
-        }
-        else
-        {
-            instance = (T)this;
+            if (instance == null)
+            {
+                instance = FindObjectOfType<T>();
+            }
+
+            return instance;
         }
     }
 }
