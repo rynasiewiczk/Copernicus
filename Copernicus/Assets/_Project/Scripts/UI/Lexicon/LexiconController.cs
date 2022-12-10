@@ -1,5 +1,6 @@
 namespace _Project.Scripts.UI
 {
+    using DG.Tweening;
     using UnityEngine;
     using UnityEngine.UI;
 
@@ -7,10 +8,17 @@ namespace _Project.Scripts.UI
     {
         [SerializeField] private Button _closeButton;
 
+        [SerializeField] private WindowAnimationData _animationData;
+        
+        private bool _isAnimating;
+
         private void OnEnable()
         {
             UiController.Instance.SetWindowOpen(true);
             _closeButton.onClick.AddListener(Close);
+
+            _isAnimating = true;
+            DOVirtual.Float(0, 1, _animationData.ShowDuration, value => transform.localScale = Vector3.one * value).SetEase(_animationData.ShowCurve).OnComplete(() => _isAnimating = false);
         }
 
         private void OnDisable()
@@ -26,7 +34,13 @@ namespace _Project.Scripts.UI
 
         private void Close()
         {
-            gameObject.SetActive(false);
+            _isAnimating = true;
+
+            DOVirtual.Float(0, 1, _animationData.HideDuration, value => transform.localScale = Vector3.one * value).SetEase(_animationData.HideCurve).OnComplete(() =>
+            {
+                _isAnimating = false;
+                gameObject.SetActive(false);
+            });
         }
     }
 }

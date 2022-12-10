@@ -41,10 +41,12 @@ namespace _Project.Scripts.UI
         {
             Group = group;
             Group.SetActive(true);
-            ResetGroupAsChild(Group);
+            ResetGroupAsChild(Group, true);
         }
 
-        private void ResetGroupAsChild(IDraggable draggable)
+        private void ResetGroupAsChild(IDraggable draggable) => ResetGroupAsChild(draggable, false);
+
+        private void ResetGroupAsChild(IDraggable draggable, bool bump)
         {
             if (Group == null)
             {
@@ -59,11 +61,11 @@ namespace _Project.Scripts.UI
             }
 
             Group.SetParent(_container);
-            CenterGroup();
+            CenterGroup(bump);
             Group.ResetColor();
         }
 
-        private void CenterGroup()
+        private void CenterGroup(bool bump)
         {
             if (Group == null)
             {
@@ -77,7 +79,11 @@ namespace _Project.Scripts.UI
             var yOffset = groupSizeY % 2 == 0 ? _offset : 0;
 
             Group.SetLocalPosition(new Vector3(xOffset, yOffset, 0));
-            Group.PlayBump();
+            
+            if (bump)
+            {
+                Group.PlayBump();
+            }
         }
 
         //debug
