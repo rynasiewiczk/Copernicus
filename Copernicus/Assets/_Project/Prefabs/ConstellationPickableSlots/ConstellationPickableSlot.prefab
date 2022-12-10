@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 5881824330730242129}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3097767136868619450
 MonoBehaviour:
@@ -47,7 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d480b1b17b497db9b0698ecc64906e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _button: {fileID: 3837614422380177099}
   _container: {fileID: 5881824330730242129}
 --- !u!61 &4767028832994794379
 BoxCollider2D:
@@ -131,7 +130,7 @@ Transform:
   m_GameObject: {fileID: 8332644728266072711}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3859947482719898786}

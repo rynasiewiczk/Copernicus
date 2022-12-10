@@ -3,12 +3,16 @@ namespace _Project.Scripts.Constellations
     using System;
     using System.Collections.Generic;
     using Sirenix.OdinInspector;
+    using Unity.VisualScripting;
     using UnityEngine;
 
     public class Constellation : MonoBehaviour, IDraggable
     {
+        [SerializeField] private Transform _partsRoot;
         [SerializeField] private List<ConstellationPart> _parts;
         [SerializeField] private List<ConstellationConnection> _connections;
+        [SerializeField] private List<LineRenderer> _lines;
+        [SerializeField] private LineRenderer _linePrefab;
 
         public Transform Root => gameObject.transform;
         public IReadOnlyList<ConstellationPart> Parts => _parts;
@@ -45,6 +49,7 @@ namespace _Project.Scripts.Constellations
 
         public void SetAsDroppedOnBoard() => IsDroppedOnBoard = true;
         
+        #if UNITY_EDITOR
         [Button]
         public void Setup()
         {
@@ -54,7 +59,18 @@ namespace _Project.Scripts.Constellations
             {
                 _parts.Add(part);
             }
+
+            _lines.ForEach(x => DestroyImmediate(x.gameObject));
+            _lines.Clear();
+            foreach (var connection in _connections)
+            {
+                var newLine = UnityEditor.PrefabUtility.InstantiatePrefab(_linePrefab, _partsRoot).GetComponent<LineRenderer>();
+                newLine.SetPosition(0, connection.First.transform.localPosition);
+                newLine.SetPosition(1, connection.Second.transform.localPosition);
+                _lines.Add(newLine);
+            }
         }
+        #endif
 
         private void OnDrawGizmos()
         {
