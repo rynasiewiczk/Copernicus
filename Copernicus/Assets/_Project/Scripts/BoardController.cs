@@ -20,6 +20,7 @@ namespace _Project.Scripts
         };
 
         private List<Block> _blocksOnBoard = new();
+        public IReadOnlyList<Block> BlocksOnBoard => _blocksOnBoard;
 
         private void Start()
         {
