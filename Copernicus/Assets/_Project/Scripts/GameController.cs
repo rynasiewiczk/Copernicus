@@ -58,6 +58,8 @@ namespace _Project.Scripts
             FillUpGroupsToShow();
             FillUpConstellations();
             RefreshConstellationsPossibility();
+
+            constellation.HandlePutOnMap();
         }
 
         private void FillUpGroupsToShow()

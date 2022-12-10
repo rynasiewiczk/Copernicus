@@ -42,6 +42,12 @@ namespace _Project.Scripts
         public void DropOnMap(float duration)
         {
             var gridPosition = GetGridPosition();
+
+            if (HasStar)
+            {
+                BlockStar.MarkDroppedOnBoard();
+            }
+
             transform.DOMove(new Vector2(gridPosition.x, gridPosition.y), duration);
             IsOnMap = true;
         }

@@ -17,8 +17,10 @@ namespace _Project.Scripts
         [SerializeField] private float _showRotation = 360;
         [SerializeField] private AnimationCurve _showScaleCurve;
 
+        [SerializeField] private ParticleSystem _idleParticleSystem;
         [SerializeField] private ParticleSystem _transitionParticleSystem;
         
+        public bool IsDroppedOnBoard { get; private set; }
         public bool IsAlreadyUsed { get; private set; }
 
         // private void Update()
@@ -34,6 +36,17 @@ namespace _Project.Scripts
         //         _spriteRenderer.sprite = _unusedStarSprite;
         //     }
         // }
+
+        private void Start()
+        {
+            _idleParticleSystem.gameObject.SetActive(false);
+        }
+
+        public void MarkDroppedOnBoard()
+        {
+            IsDroppedOnBoard = true;
+            _idleParticleSystem.gameObject.SetActive(true);
+        }
         
         public void MarkUsed()
         {
