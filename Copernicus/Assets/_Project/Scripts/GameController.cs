@@ -10,6 +10,7 @@ namespace _Project.Scripts
 
     public class GameController : SingletonBehaviour<GameController>
     {
+        public event Action<Constellation> OnNewConstellationPlaced; 
         public event Action<int> OnGroupsCreated;
         public event Action<Group> OnGroupShowing;
         public event Action<Constellation> OnConstellationShowing;
@@ -58,6 +59,12 @@ namespace _Project.Scripts
         public void PutConstellationOnMap(Constellation constellation)
         {
             _currentConstellations.Remove(constellation);
+
+            if (_droppedConstellations.All(x => x.Name != constellation.Name))
+            {
+                OnNewConstellationPlaced?.Invoke(constellation);
+            }
+            
             _droppedConstellations.Add(constellation);
             CreateGroups(2); //todo: define based on constellations
             FillUpGroupsToShow();

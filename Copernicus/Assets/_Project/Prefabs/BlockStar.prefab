@@ -53,7 +53,9 @@ MonoBehaviour:
   _hideDuration: 0.12
   _hideRotation: 360
   _showDuration: 0.55
-  _showRotation: 720
+  _showRotationRange:
+    _min: 710
+    _max: 730
   _showScaleCurve:
     serializedVersion: 2
     m_Curve:
@@ -80,6 +82,48 @@ MonoBehaviour:
     m_RotationOrder: 4
   _idleParticleSystem: {fileID: 6530419278993553284}
   _transitionParticleSystem: {fileID: 9148036240805401103}
+  _idleScaleCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0.4000001
+      outSlope: 0.4000001
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.25
+      value: 1.1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.75
+      value: 0.9
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.4000001
+      outSlope: 0.4000001
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!212 &1478391671276391619
 SpriteRenderer:
   m_ObjectHideFlags: 0
