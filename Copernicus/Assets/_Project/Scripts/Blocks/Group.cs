@@ -3,6 +3,7 @@ namespace _Project.Scripts
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using CarterGames.Assets.AudioManager;
     using DG.Tweening;
     using LazySloth.Observable;
     using Sirenix.OdinInspector;
@@ -51,8 +52,9 @@ namespace _Project.Scripts
             }
         }
 
-        public void DropOnMap()
+        public void DropOnMap(bool silent = false)
         {
+            if(!silent) { AudioManager.instance.Play("epic-object-placing-105779"); }
             var reason = new InteractionIgnoreReason("Placing block");
             GameController.Instance.InteractionIgnoreReasons.Add(reason);
             DOVirtual.DelayedCall(_dropOnMapDuration, () => GameController.Instance.InteractionIgnoreReasons.Remove(reason));

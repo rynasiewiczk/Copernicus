@@ -1,5 +1,6 @@
 namespace _Project.Scripts
 {
+    using CarterGames.Assets.AudioManager;
     using DG.Tweening;
     using Sirenix.OdinInspector;
     using UnityEngine;
