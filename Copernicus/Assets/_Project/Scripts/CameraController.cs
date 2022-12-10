@@ -1,6 +1,7 @@
 namespace _Project.Scripts
 {
     using Cinemachine;
+    using DG.Tweening;
     using UnityEngine;
 
     public class CameraController : SingletonBehaviour<CameraController>
@@ -10,9 +11,12 @@ namespace _Project.Scripts
         [SerializeField] private float _zoomSpeed;
         [SerializeField] private float _minZoom;
         [SerializeField] private float _maxZoom;
+
+        private bool _isShowingEnd;
         
         private void Update()
         {
+            if(_isShowingEnd) { return; }
             var moveDir = Vector3.zero;
 
             if (Input.GetKey(KeyCode.W))
@@ -51,6 +55,24 @@ namespace _Project.Scripts
             var newSize = _virtualCamera.m_Lens.OrthographicSize + ortoChange * _zoomSpeed * Time.deltaTime;
             newSize = Mathf.Clamp(newSize, _minZoom, _maxZoom);
             _virtualCamera.m_Lens.OrthographicSize = newSize;
+        }
+
+        public void ShowEndSequence(Vector2 center, float minx, float miny)
+        {
+            _isShowingEnd = true;
+            transform.position = center;
+
+            var aspect = _virtualCamera.m_Lens.Aspect;
+            
+            var sizeForY = (miny + 2f) / 2f;
+            var sizeForX = ((minx + 2f) / 2f) / aspect;
+            var startSize = _virtualCamera.m_Lens.OrthographicSize;
+            var newSize  = Mathf.Max(sizeForX, sizeForY);
+            
+            DOVirtual.Float(startSize, newSize, 2f, x => 
+            {
+                _virtualCamera.m_Lens.OrthographicSize = x;
+            });
         }
     }
 }

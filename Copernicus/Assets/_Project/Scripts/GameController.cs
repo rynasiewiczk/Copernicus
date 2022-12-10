@@ -4,13 +4,16 @@ namespace _Project.Scripts
     using System.Collections.Generic;
     using System.Linq;
     using Constellations;
+    using DG.Tweening;
     using UnityEngine;
     using Random = UnityEngine.Random;
 
     public class GameController : SingletonBehaviour<GameController>
     {
         public event Action<Group> OnGroupShowing;
-        public event Action<Constellation> OnConstellationShowing; 
+        public event Action<Constellation> OnConstellationShowing;
+
+        [SerializeField] private Transform _deskRoot;
 
         [Header("Groups")]
         [SerializeField] private GroupsCatalog _groupsCatalog;
@@ -48,6 +51,7 @@ namespace _Project.Scripts
             _groupsToShow.Remove(group);
             FillUpGroupsToShow();
             RefreshConstellationsPossibility();
+            CheckForGameOver();
         }
 
         public void PutConstellationOnMap(Constellation constellation)
@@ -58,6 +62,7 @@ namespace _Project.Scripts
             FillUpGroupsToShow();
             FillUpConstellations();
             RefreshConstellationsPossibility();
+            CheckForGameOver();
         }
 
         private void FillUpGroupsToShow()
@@ -108,6 +113,27 @@ namespace _Project.Scripts
             {
                 constellation.MarkPossibleToPutOnBoard(BoardController.Instance.IsConstellationPossibleToPutOnBoard(constellation));
             }
+        }
+
+        private void CheckForGameOver()
+        {
+            if(_groupsToShow.Any()) { return; }
+            if(_currentConstellations.Any(x => x.IsPossibleToPutOnBoard)) { return; }
+
+            var allPositions = BoardController.Instance.BlocksOnBoard.Select(x => x.GetGridPosition()).ToList();
+            var byX = allPositions.OrderBy(v => v.x).ToList();
+            var minX = byX.First().x;
+            var maxX = byX.Last().x;
+            var byY = allPositions.OrderBy(v => v.y).ToList();
+            var minY = byY.First().y;
+            var maxY = byY.Last().y;
+
+            var center = new Vector2((minX + maxX) / 2f, (minY + maxY) / 2f);
+            var xExtend = Mathf.Abs(maxX - minY);
+            var yExtend = Mathf.Abs(maxY - minY);
+            CameraController.Instance.ShowEndSequence(center, xExtend, yExtend);
+
+            _deskRoot.DOScale(100f, 20f);
         }
     }
 }
