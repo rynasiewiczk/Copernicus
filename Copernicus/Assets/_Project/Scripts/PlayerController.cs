@@ -31,10 +31,23 @@ namespace _Project.Scripts
         {
             MoveGroupWithCursor();
 
+            CheckIfCanPutOnBoard();
+            
             if (Input.GetMouseButtonDown(1))
             {
                 Unpick();
             }
+        }
+
+        private void CheckIfCanPutOnBoard()
+        {
+            if (_currentGroup == null)
+            {
+                return;
+            }
+            
+            var canPutOnBoard = BoardController.Instance.IsPositionValidForGroup(_currentGroup);
+            _currentGroup.SetOverBoardValidPositionView(canPutOnBoard);
         }
 
         private void MoveGroupWithCursor()

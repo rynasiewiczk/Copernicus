@@ -1,7 +1,6 @@
 namespace _Project.Scripts.UI
 {
     using System.Collections.Generic;
-    using LazySloth.Utilities;
     using Sirenix.OdinInspector;
     using UnityEngine;
 

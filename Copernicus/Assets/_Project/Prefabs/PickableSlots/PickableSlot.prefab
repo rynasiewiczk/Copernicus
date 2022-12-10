@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _button: {fileID: 3837614422380177099}
   _container: {fileID: 5881824330730242129}
+  _offset: -0.5
 --- !u!61 &4767028832994794379
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -92,7 +93,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 3, y: 3}
   m_EdgeRadius: 0
 --- !u!114 &3837614422380177099
 MonoBehaviour:

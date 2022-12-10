@@ -1,5 +1,6 @@
 namespace _Project.Scripts.UI
 {
+    using System.Linq;
     using LazySloth.Utilities;
     using Sirenix.OdinInspector;
     using UnityEngine;
@@ -8,6 +9,8 @@ namespace _Project.Scripts.UI
     {
         [SerializeField] private Physics2dButton _button;
         [SerializeField] private Transform _container;
+
+        [SerializeField] private float _offset = -.5f;
 
         public Group Group { get; private set; }
 
@@ -40,8 +43,25 @@ namespace _Project.Scripts.UI
             }
             
             Group.SetParent(_container);
+            CenterGroup();
+            Group.ResetColor();
         }
-        
+
+        private void CenterGroup()
+        {
+            if (Group == null)
+            {
+                return;
+            }
+
+            var groupSizeX = Group.Blocks.Select(x => x.GetGridPosition().x).Distinct().Count();
+            var groupSizeY = Group.Blocks.Select(x => x.GetGridPosition().y).Distinct().Count();
+
+            var xOffset = groupSizeX % 2 == 0 ? _offset : 0;
+            var yOffset = groupSizeY % 2 == 0 ? _offset : 0;
+            Group.SetWorldPosition(Group.transform.position + new Vector3(xOffset, yOffset, 0));
+        }
+
         public void Clear()
         {
             Group = null;

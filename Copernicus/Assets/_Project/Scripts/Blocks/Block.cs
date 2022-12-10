@@ -7,6 +7,8 @@ namespace _Project.Scripts
     {
         [SerializeField] private GameObject _starContainer;
         [SerializeField] private BlockStar _blockStarPrefab;
+
+        [SerializeField] private SpriteRenderer _spriteRenderer;
         
         public BlockStar BlockStar { get; private set; }
 
@@ -31,9 +33,13 @@ namespace _Project.Scripts
 
         public void DropOnMap()
         {
-            //spawn block (check for star) on a map with current grid position (new one or this one?)
+            var gridPosition = GetGridPosition();
+            transform.position = new Vector2(gridPosition.x, gridPosition.y);
+            IsOnMap = true;
         }
 
+        public void SetColor(Color color) => _spriteRenderer.color = color;
+        
         [Button]
         public void Validate()
         {
@@ -51,6 +57,5 @@ namespace _Project.Scripts
                 gameObject.name = $"Block_{x}_{y}";
             }
         }
-        
     }
 }

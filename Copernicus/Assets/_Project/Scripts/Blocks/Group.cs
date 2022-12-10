@@ -3,12 +3,17 @@ namespace _Project.Scripts
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using LazySloth.Utilities;
     using Sirenix.OdinInspector;
     using UnityEngine;
 
     public class Group : MonoBehaviour
     {
         [SerializeField] private List<Block> _blocks;
+
+        [SerializeField] private Color _defaultColor;
+        [SerializeField] private Color _invalidPlaceColor;
+        [SerializeField] private Color _validPlaceColor;
 
         public IReadOnlyList<Block> Blocks => _blocks;
         public bool IsOnMap => _blocks.Any(x => x.IsOnMap);
@@ -21,15 +26,14 @@ namespace _Project.Scripts
                 blocksInRandom[i].Init(i < numberOfStars);
             }
         }
-        
+
         public void DropOnMap()
         {
             foreach (var block in _blocks)
             {
+                block.SetColor(_defaultColor);
                 block.DropOnMap();
             }
-
-            //despawn this?
         }
 
         public void RotateLeft() => transform.eulerAngles += Vector3.left * 90;
@@ -37,6 +41,27 @@ namespace _Project.Scripts
         public void RotateRight() => transform.eulerAngles += Vector3.right * 90;
 
         public void ResetRotation() => transform.eulerAngles = Vector3.zero;
+
+        public void SetParent(Transform parent)
+        {
+            transform.SetParent(parent, false);
+            transform.localPosition = Vector3.zero;
+        }
+
+        public void ResetColor() => _blocks.ForEach(x => x.SetColor(_defaultColor));
+
+        public void SetWorldPosition(Vector3 position)
+        {
+            transform.position = position;
+        }
+
+        public void SetOverBoardValidPositionView(bool canPutOnBoard)
+        {
+            foreach (var block in _blocks)
+            {
+                block.SetColor(canPutOnBoard ? _validPlaceColor : _invalidPlaceColor);
+            }
+        }
 
         ///////////
 
@@ -48,23 +73,13 @@ namespace _Project.Scripts
 
         private void OnValidate()
         {
+            _blocks.Clear();
+            _blocks = GetComponentsInChildren<Block>().ToList();
+            
             foreach (var block in _blocks)
             {
                 block.Validate();
             }
-        }
-
-        public void SetActive(bool active) => gameObject.SetActive(active);
-
-        public void SetParent(Transform parent)
-        {
-            transform.SetParent(parent, false);
-            transform.localPosition = Vector3.zero;
-        }
-
-        public void SetWorldPosition(Vector3 position)
-        {
-            transform.position = position;
         }
     }
 }

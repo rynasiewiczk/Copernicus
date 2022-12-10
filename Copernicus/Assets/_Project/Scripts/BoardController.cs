@@ -1,11 +1,14 @@
 namespace _Project.Scripts
 {
+    using System;
     using System.Collections.Generic;
     using Constellations;
     using UnityEngine;
 
     public class BoardController : SingletonBehaviour<BoardController>
     {
+        [SerializeField] private GroupsCatalog _groupsCatalog;
+        
         private readonly List<Vector2Int> _neighborsPositions = new()
         {
             Vector2Int.down,
@@ -14,7 +17,20 @@ namespace _Project.Scripts
             Vector2Int.right
         };
 
-        private List<Block> _blocksOnBoard;
+        private List<Block> _blocksOnBoard = new();
+
+        private void Start()
+        {
+            SpawnInitialBlock();
+        }
+
+        private void SpawnInitialBlock()
+        {
+            var singleElementGroupPrefab = _groupsCatalog.SingleElementGroup;
+            var instance = Instantiate(singleElementGroupPrefab);
+            instance.SetWorldPosition(Vector3.zero);
+            PutGroupOnBoard(instance);
+        }
 
         public bool IsPositionValidForGroup(Group group)
         {
