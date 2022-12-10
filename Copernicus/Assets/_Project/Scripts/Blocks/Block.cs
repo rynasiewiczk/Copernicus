@@ -31,6 +31,13 @@ namespace _Project.Scripts
             var y = Mathf.RoundToInt(transform.position.y);
             return new Vector2Int(x, y);
         }
+        
+        public Vector2Int GetLocalGridPosition()
+        {
+            var x = Mathf.RoundToInt(transform.localPosition.x);
+            var y = Mathf.RoundToInt(transform.localPosition.y);
+            return new Vector2Int(x, y);
+        }
 
         public void DropOnMap(float duration)
         {

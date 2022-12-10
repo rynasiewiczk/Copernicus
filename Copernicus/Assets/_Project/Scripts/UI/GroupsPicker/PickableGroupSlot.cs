@@ -70,12 +70,14 @@ namespace _Project.Scripts.UI
                 return;
             }
 
-            var groupSizeX = Group.Blocks.Select(x => x.GetGridPosition().x).Distinct().Count();
-            var groupSizeY = Group.Blocks.Select(x => x.GetGridPosition().y).Distinct().Count();
+            var groupSizeX = Group.Blocks.Select(x => x.GetLocalGridPosition().x).Distinct().Count();
+            var groupSizeY = Group.Blocks.Select(x => x.GetLocalGridPosition().y).Distinct().Count();
 
             var xOffset = groupSizeX % 2 == 0 ? _offset : 0;
             var yOffset = groupSizeY % 2 == 0 ? _offset : 0;
-            Group.SetWorldPosition(Group.transform.position + new Vector3(xOffset, yOffset, 0));
+
+            Group.SetLocalPosition(new Vector3(xOffset, yOffset, 0));
+            Group.PlayBump();
         }
 
         //debug

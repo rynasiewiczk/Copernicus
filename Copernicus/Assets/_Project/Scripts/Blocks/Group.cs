@@ -17,6 +17,7 @@ namespace _Project.Scripts
 
         private float _rotationDuration = .15f;
         private float _dropOnMapDuration = .15f;
+        private float _bumpDuration = .2f;
 
         public Transform Root => gameObject.transform;
         public IReadOnlyList<Block> Blocks => _blocks;
@@ -93,7 +94,12 @@ namespace _Project.Scripts
         {
             transform.position = position;
         }
-
+        
+        public void SetLocalPosition(Vector3 position)
+        {
+            transform.localPosition = position;
+        }
+        
         public void SetOverBoardValidPositionView(bool canPutOnBoard)
         {
             foreach (var block in _blocks)
@@ -104,6 +110,13 @@ namespace _Project.Scripts
 
         public void SetActive(bool active) => gameObject.SetActive(active);
 
+        public void PlayBump()
+        {
+            var reason = new InteractionIgnoreReason("Group bump");
+            GameController.Instance.InteractionIgnoreReasons.Add(reason);
+            transform.DOPunchScale(Vector3.one * 0.1f, _bumpDuration).OnComplete(() => GameController.Instance.InteractionIgnoreReasons.Remove(reason));
+        }
+        
         ///////////
 
         [Button]
