@@ -1,5 +1,7 @@
 namespace _Project.Scripts.Constellations
 {
+    using System;
+    using DG.Tweening;
     using UnityEngine;
 
     public class PickableConstellationSlot : MonoBehaviour
@@ -31,6 +33,18 @@ namespace _Project.Scripts.Constellations
             }
 
             PlayerController.Instance.TryPickUpDraggable(_constellation);
+        }
+
+        private void OnMouseEnter()
+        {
+            if(PlayerController.Instance.HasDraggable) { return; }
+            
+            _container.DOScale(0.7f, 0.3f);
+        }
+
+        private void OnMouseExit()
+        {
+            _container.DOScale(0.3f, 0.3f);
         }
 
         public void SetConstellation(Constellation constellation)

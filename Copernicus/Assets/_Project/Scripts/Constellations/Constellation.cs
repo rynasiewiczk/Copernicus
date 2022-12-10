@@ -34,6 +34,11 @@ namespace _Project.Scripts.Constellations
 
         public bool IsDroppedOnBoard { get; private set; }
 
+        private void OnEnable()
+        {
+            ResetPartsState();
+        }
+
         public void SetWorldPosition(Vector3 position)
         {
             transform.position = position;
@@ -73,6 +78,14 @@ namespace _Project.Scripts.Constellations
             foreach (var part in _parts)
             {
                 part.SetValid(validParts.Contains(part));
+            }
+        }
+
+        public void ResetPartsState()
+        {
+            foreach (var part in _parts)
+            {
+                part.SetValid(false);
             }
         }
 

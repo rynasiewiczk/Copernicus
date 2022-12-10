@@ -145,6 +145,10 @@ namespace _Project.Scripts
 
             _currentDraggable.Root.ChangeLayerToDesk();
             _currentDraggable.ResetRotation();
+            if (_currentDraggable is Constellation constellation)
+            {
+                constellation.ResetPartsState();
+            }
             OnUnpickedDraggable?.Invoke(_currentDraggable);
             _currentDraggable = null;
         }

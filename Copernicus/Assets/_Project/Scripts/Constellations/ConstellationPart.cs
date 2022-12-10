@@ -4,6 +4,8 @@ namespace _Project.Scripts.Constellations
 
     public class ConstellationPart : MonoBehaviour
     {
+        [SerializeField] private GameObject _validView;
+        
         public Vector2Int GetGridPosition()
         {
             var x = Mathf.RoundToInt(transform.position.x);
@@ -20,7 +22,8 @@ namespace _Project.Scripts.Constellations
 
         public void SetValid(bool valid)
         {
-            transform.localScale = valid ? Vector3.one  * 2f : Vector3.one;
+            _validView.SetActive(valid);
+            //transform.localScale = valid ? Vector3.one  * 2f : Vector3.one;
         }
     }
 }
