@@ -23,18 +23,18 @@ namespace _Project.Scripts.Constellations
             return new Vector2Int(x, y);
         }
 
-        private bool _isValid = true;
+        public bool IsValid = true;
         public void SetValid(bool valid)
         {
-            if (valid && !_isValid)
+            if (valid && !IsValid)
             {
-                _isValid = true;
+                IsValid = true;
                 _validTween?.Kill();
                 _validTween = _validView.DOFade(1f, 0.3f);
             }
-            else if(!valid && _isValid)
+            else if(!valid && IsValid)
             {
-                _isValid = false;
+                IsValid = false;
                 _validTween?.Kill();
                 _validTween = _validView.DOFade(0f, 0.3f);
             }
