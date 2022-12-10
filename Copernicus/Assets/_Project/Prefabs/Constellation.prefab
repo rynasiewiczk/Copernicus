@@ -645,7 +645,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5574414509197531808}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.029, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -694,7 +694,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: 6b5bef071a53e6f4880c0b3ac8a0df8c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 0.98039216, g: 0.95703346, b: 0, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1012,6 +1012,7 @@ MonoBehaviour:
   _glow: {fileID: 6726987922922396494}
   _icon: {fileID: 0}
   _name: 
+  _nameTag: {fileID: 0}
   _description: 
   _fadeOutDuration: 0.22
   _droppedConnectionLinePrefab: {fileID: 1231095630998731123, guid: 9ee2b0019fae24b5fadac700bdac293a, type: 3}

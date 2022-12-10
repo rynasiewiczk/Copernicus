@@ -545,6 +545,10 @@ PrefabInstance:
       value: Ryby
       objectReference: {fileID: 0}
     - target: {fileID: 5534661543418241272, guid: 1a5d44005bb2e40399cf95a95f40d51d, type: 3}
+      propertyPath: _nameTag
+      value: 
+      objectReference: {fileID: 21300000, guid: a32c47fe3b06545bca6002715afffc52, type: 3}
+    - target: {fileID: 5534661543418241272, guid: 1a5d44005bb2e40399cf95a95f40d51d, type: 3}
       propertyPath: _description
       value: "Wed\u0142ug greckiego mitu dwie ryby tej konstelacji przedstawiaj\u0105
         Afrodyt\u0119 i jej syna Erosa. Mit z ni\u0105 zwi\u0105zany odnosi si\u0119

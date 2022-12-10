@@ -9,6 +9,7 @@ namespace _Project.Scripts.UI
     {
         [SerializeField] private Image _image;
         [SerializeField] private TextMeshProUGUI _nameText;
+        [SerializeField] private Image _nameTag;
         [SerializeField] private TextMeshProUGUI _descriptionText;
 
         [SerializeField] private Sprite _lockedSprite;
@@ -18,6 +19,8 @@ namespace _Project.Scripts.UI
             if (isUnlocked)
             {
                 _image.sprite = constellation.Icon;
+                _nameTag.gameObject.SetActive(true);
+                _nameTag.sprite = constellation.NameTag;
                 _nameText.text = constellation.Name;
                 _descriptionText.text = constellation.Description;
 
@@ -25,6 +28,7 @@ namespace _Project.Scripts.UI
             }
 
             _image.sprite = _lockedSprite;
+            _nameTag.gameObject.SetActive(false);
             _nameText.text = string.Empty;
             _descriptionText.text = "Build this constellation to see its description";
         }

@@ -565,6 +565,10 @@ PrefabInstance:
       value: Strzelec
       objectReference: {fileID: 0}
     - target: {fileID: 5534661543418241272, guid: 1a5d44005bb2e40399cf95a95f40d51d, type: 3}
+      propertyPath: _nameTag
+      value: 
+      objectReference: {fileID: 21300000, guid: d3b240c98d8fc4d8fa15b152fc212709, type: 3}
+    - target: {fileID: 5534661543418241272, guid: 1a5d44005bb2e40399cf95a95f40d51d, type: 3}
       propertyPath: _description
       value: "Przedstawiany by\u0142 jako posta\u0107 z dwiema g\u0142owami. Jedna
         to g\u0142owa pantery, druga by\u0142a g\u0142ow\u0105 cz\u0142owieka, a

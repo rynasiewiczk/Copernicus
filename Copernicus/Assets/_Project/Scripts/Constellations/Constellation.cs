@@ -23,6 +23,8 @@ namespace _Project.Scripts.Constellations
 
         [SerializeField] private Sprite _icon;
         [SerializeField] private string _name;
+        [SerializeField] private Sprite _nameTag;
+        
         [SerializeField, TextArea] private string _description;
 
         [SerializeField] private float _fadeOutDuration = .3f;
@@ -40,6 +42,7 @@ namespace _Project.Scripts.Constellations
 
         public Sprite Icon => _icon;
         public string Name => _name;
+        public Sprite NameTag => _nameTag;
         public string Description => _description;
         public bool IsPossibleToPutOnBoard { get; private set; }
 

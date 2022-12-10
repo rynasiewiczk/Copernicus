@@ -565,6 +565,10 @@ PrefabInstance:
       value: Wodnik
       objectReference: {fileID: 0}
     - target: {fileID: 5534661543418241272, guid: 1a5d44005bb2e40399cf95a95f40d51d, type: 3}
+      propertyPath: _nameTag
+      value: 
+      objectReference: {fileID: 21300000, guid: f02b9758445d24d98a5d985722d5b96a, type: 3}
+    - target: {fileID: 5534661543418241272, guid: 1a5d44005bb2e40399cf95a95f40d51d, type: 3}
       propertyPath: _description
       value: "Na mezopotamskich tabliczkach mo\u017Cna dopatrzy\u0107 si\u0119 wizerunku
         Wodnika, przedstawianego jako kl\u0119cz\u0105cy m\u0119\u017Cczyzna. Z przewieszonego
