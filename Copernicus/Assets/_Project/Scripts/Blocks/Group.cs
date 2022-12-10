@@ -3,7 +3,7 @@ namespace _Project.Scripts
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using LazySloth.Utilities;
+    using DG.Tweening;
     using Sirenix.OdinInspector;
     using UnityEngine;
 
@@ -14,6 +14,7 @@ namespace _Project.Scripts
         [SerializeField] private Color _defaultColor;
         [SerializeField] private Color _invalidPlaceColor;
         [SerializeField] private Color _validPlaceColor;
+        [SerializeField] private float _rotationDuration = .33f;
 
         public Transform Root => gameObject.transform;
         public IReadOnlyList<Block> Blocks => _blocks;
@@ -46,12 +47,29 @@ namespace _Project.Scripts
                 child.gameObject.layer = newLayer;
             }
         }
-        
-        public void RotateLeft() => transform.eulerAngles += new Vector3(0, 0, -90);
 
-        public void RotateRight() => transform.eulerAngles += new Vector3(0, 0, 90);
+        public void RotateLeft()
+        {
+            var interactionIgnoreReason = new InteractionIgnoreReason("Rotating group");
+            GameController.Instance.InteractionIgnoreReasons.Add(interactionIgnoreReason);
+            transform.DORotate(transform.eulerAngles += new Vector3(0, 0, -90), _rotationDuration).OnComplete(() =>
+            {
+                GameController.Instance.InteractionIgnoreReasons.Remove(interactionIgnoreReason);
+            });
+        }
+
+        public void RotateRight()
+        {
+            var interactionIgnoreReason = new InteractionIgnoreReason("Rotating group");
+            GameController.Instance.InteractionIgnoreReasons.Add(interactionIgnoreReason);
+            transform.DORotate(transform.eulerAngles += new Vector3(0, 0, 90), _rotationDuration).OnComplete(() =>
+            {
+                GameController.Instance.InteractionIgnoreReasons.Remove(interactionIgnoreReason);
+            });
+        }
 
         public void ResetRotation() => transform.eulerAngles = Vector3.zero;
+
         public void SetParentAndScale(Transform parent, Vector3 scale)
         {
             transform.SetParent(parent);

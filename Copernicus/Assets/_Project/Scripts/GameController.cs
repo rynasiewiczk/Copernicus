@@ -30,6 +30,9 @@ namespace _Project.Scripts
         public int GroupsQueueCount => _groupsQueue.Count;
         public IReadOnlyList<Constellation> DroppedConstellations => _droppedConstellations;
 
+        public List<InteractionIgnoreReason> InteractionIgnoreReasons = new();
+        public bool HasInteractionIgnoreReason => InteractionIgnoreReasons.Any();
+
         private void Start() //start game
         {
             FillUpConstellations();

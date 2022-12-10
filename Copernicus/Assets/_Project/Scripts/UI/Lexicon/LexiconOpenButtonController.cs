@@ -16,7 +16,7 @@ namespace _Project.Scripts.UI
                 return;
             }
 
-            if (UiController.Instance.IsWindowOpen)
+            if (GameController.Instance.HasInteractionIgnoreReason)
             {
                 return;
             }

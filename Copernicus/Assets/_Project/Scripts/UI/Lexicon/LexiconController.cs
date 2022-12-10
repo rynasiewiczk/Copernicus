@@ -6,16 +6,16 @@ namespace _Project.Scripts.UI
     public class LexiconController : MonoBehaviour
     {
         [SerializeField] private Button _closeButton;
-        
+
         private void OnEnable()
         {
-            UiController.Instance.IsWindowOpen = true;
+            UiController.Instance.SetWindowOpen(true);
             _closeButton.onClick.AddListener(Close);
         }
 
         private void OnDisable()
         {
-            UiController.Instance.IsWindowOpen = false;
+            UiController.Instance.SetWindowOpen(false);
             _closeButton.onClick.RemoveListener(Close);
         }
 
@@ -23,7 +23,7 @@ namespace _Project.Scripts.UI
         {
             gameObject.SetActive(true);
         }
-        
+
         private void Close()
         {
             gameObject.SetActive(false);

@@ -20,11 +20,9 @@ namespace _Project.Scripts
         public IDraggable CurrentDraggable => _currentDraggable;
         public bool HasDraggable => CurrentDraggable != null;
 
-        private bool _didJustChangeDraggable;
-
         public bool TryPickUpDraggable(IDraggable draggable)
         {
-            if (HasDraggable || _didJustChangeDraggable || UiController.Instance.IsWindowOpen)
+            if (HasDraggable || GameController.Instance.HasInteractionIgnoreReason)
             {
                 return false;
             }
@@ -59,7 +57,7 @@ namespace _Project.Scripts
                 Unpick();
             }
 
-            else if (_currentDraggable is Group group)
+            else if (_currentDraggable is Group group && !GameController.Instance.HasInteractionIgnoreReason)
             {
                 if (Input.GetKeyDown(KeyCode.Q))
                 {
@@ -74,7 +72,7 @@ namespace _Project.Scripts
 
         private void TryPutOnBoard()
         {
-            if (_didJustChangeDraggable || UiController.Instance.IsWindowOpen)
+            if (GameController.Instance.HasInteractionIgnoreReason)
             {
                 return;
             }
@@ -106,7 +104,7 @@ namespace _Project.Scripts
                 return false;
             }
 
-            if (UiController.Instance.IsWindowOpen)
+            if (GameController.Instance.HasInteractionIgnoreReason)
             {
                 return false;
             }
@@ -142,7 +140,7 @@ namespace _Project.Scripts
         [Button]
         public void Unpick()
         {
-            if (_currentDraggable == null || _didJustChangeDraggable || UiController.Instance.IsWindowOpen)
+            if (_currentDraggable == null || GameController.Instance.HasInteractionIgnoreReason)
             {
                 return;
             }
@@ -157,8 +155,9 @@ namespace _Project.Scripts
 
         private void SetChangeDraggableFlag()
         {
-            _didJustChangeDraggable = true;
-            DOVirtual.DelayedCall(.1f, () => _didJustChangeDraggable = false);
+            var interactionIgnoreReason = new InteractionIgnoreReason("Changing droppable");
+            GameController.Instance.InteractionIgnoreReasons.Add(interactionIgnoreReason);
+            DOVirtual.DelayedCall(.1f, () => GameController.Instance.InteractionIgnoreReasons.Remove(interactionIgnoreReason));
         }
 
         private void TryRotateLeft(Group group)
