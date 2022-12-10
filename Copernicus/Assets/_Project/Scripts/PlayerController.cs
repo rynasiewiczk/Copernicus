@@ -5,6 +5,7 @@ namespace _Project.Scripts
     using DG.Tweening;
     using LazySloth.Utilities;
     using Sirenix.OdinInspector;
+    using UI;
     using UnityEngine;
     using Utils;
 
@@ -23,7 +24,7 @@ namespace _Project.Scripts
 
         public bool TryPickUpDraggable(IDraggable draggable)
         {
-            if (HasDraggable || _didJustChangeDraggable)
+            if (HasDraggable || _didJustChangeDraggable || UiController.Instance.IsWindowOpen)
             {
                 return false;
             }
@@ -33,17 +34,17 @@ namespace _Project.Scripts
             _currentDraggable = draggable;
             _currentDraggable.Root.ChangeLayerToAboveDesk();
             _currentDraggable.SetParentAndScale(null, Vector3.one);
-            
+
             return true;
         }
-        
+
         private void Update()
         {
             // if (Input.GetKeyDown(KeyCode.A))
             // {
             //     GameController.Instance.gameObject.SetActive(false);
             // }
-            
+
             MoveGroupWithCursor();
 
             CheckIfCanPutOnBoard();
@@ -73,11 +74,11 @@ namespace _Project.Scripts
 
         private void TryPutOnBoard()
         {
-            if (_didJustChangeDraggable)
+            if (_didJustChangeDraggable || UiController.Instance.IsWindowOpen)
             {
                 return;
             }
-            
+
             var canPutOnBoard = CheckIfCanPutOnBoard();
             if (canPutOnBoard)
             {
@@ -101,6 +102,11 @@ namespace _Project.Scripts
         private bool CheckIfCanPutOnBoard()
         {
             if (_currentDraggable == null)
+            {
+                return false;
+            }
+
+            if (UiController.Instance.IsWindowOpen)
             {
                 return false;
             }
@@ -136,7 +142,7 @@ namespace _Project.Scripts
         [Button]
         public void Unpick()
         {
-            if (_currentDraggable == null || _didJustChangeDraggable)
+            if (_currentDraggable == null || _didJustChangeDraggable || UiController.Instance.IsWindowOpen)
             {
                 return;
             }
@@ -154,7 +160,7 @@ namespace _Project.Scripts
             _didJustChangeDraggable = true;
             DOVirtual.DelayedCall(.1f, () => _didJustChangeDraggable = false);
         }
-        
+
         private void TryRotateLeft(Group group)
         {
             group.RotateLeft();

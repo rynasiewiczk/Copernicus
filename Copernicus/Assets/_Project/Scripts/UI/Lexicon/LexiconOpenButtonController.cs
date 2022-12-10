@@ -1,24 +1,28 @@
 namespace _Project.Scripts.UI
 {
-    using System;
     using UnityEngine;
-    using UnityEngine.UI;
 
     public class LexiconOpenButtonController : MonoBehaviour
     {
-        [SerializeField] private Button _button;
-        [SerializeField] private LexiconController _lexicon;
-
-        private void OnEnable()
+        private void OnMouseDown()
         {
-            _button.onClick.AddListener(OpenLexicon);
+            OpenLexicon();
         }
 
-        private void OnDisable()
+        private void OpenLexicon()
         {
-            _button.onClick.RemoveListener(OpenLexicon);
-        }
+            if (PlayerController.Instance.HasDraggable)
+            {
+                return;
+            }
 
-        private void OpenLexicon() => _lexicon.Open();
+            if (UiController.Instance.IsWindowOpen)
+            {
+                return;
+            }
+
+            var lexicon = FindObjectOfType<LexiconController>(true);
+            lexicon.Open();
+        }
     }
 }

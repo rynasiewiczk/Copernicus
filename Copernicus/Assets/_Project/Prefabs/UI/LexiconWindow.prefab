@@ -214,12 +214,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2543418702449797058}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03ca02100b6745f58d76205ff820920c, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e1495e7df6e4e35af0acf55dfdbaa8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _constellationsCatalog: {fileID: 11400000, guid: 4e93d174003164159957f49e4ad12ad4, type: 2}
-  _detailsController: {fileID: 2543418703856013210}
-  _itemPrefab: {fileID: 536145128624557169, guid: 9fcd8094c4d5843baa6f114b09d371e2, type: 3}
+  _detailsController: {fileID: 6617413017355333602}
+  _itemPrefab: {fileID: 4819872783790378878, guid: 9fcd8094c4d5843baa6f114b09d371e2, type: 3}
   _itemsContainer: {fileID: 2543418702875633321}
 --- !u!1 &2543418702602152032
 GameObject:
@@ -763,7 +763,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2543418703463731641}
-  - component: {fileID: 2543418703463731640}
   m_Layer: 5
   m_Name: LexiconWindow
   m_TagString: Untagged
@@ -793,19 +792,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1700, y: 1000}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2543418703463731640
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2543418703463731638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f105c79829247989af33522235af1a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _closeButton: {fileID: 861985527387514811}
 --- !u!1 &2543418703752166587
 GameObject:
   m_ObjectHideFlags: 0
@@ -936,7 +922,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2543418703856013211}
-  - component: {fileID: 2543418703856013210}
+  - component: {fileID: 6617413017355333602}
   m_Layer: 5
   m_Name: LexiconDetailsController
   m_TagString: Untagged
@@ -965,7 +951,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 1, y: 0.5}
---- !u!114 &2543418703856013210
+--- !u!114 &6617413017355333602
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -974,7 +960,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2543418703856013208}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 729e5fbb57ac4810a100fa7821c66775, type: 3}
+  m_Script: {fileID: 11500000, guid: ca51f29a1211436f8fb8999e4f617f0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _image: {fileID: 2543418702323195492}

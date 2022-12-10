@@ -163,7 +163,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5557827149330829810}
-  - component: {fileID: 536145128624557169}
+  - component: {fileID: 4819872783790378878}
   m_Layer: 5
   m_Name: LexiconItem
   m_TagString: Untagged
@@ -192,7 +192,7 @@ RectTransform:
   m_AnchoredPosition: {x: 197, y: -180}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &536145128624557169
+--- !u!114 &4819872783790378878
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5557827149330829811}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70136fcb2ad8411f96296a2a70c66b36, type: 3}
+  m_Script: {fileID: 11500000, guid: d4a19975552a45e6a7a993d851f67311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _image: {fileID: 5492583645188240842}
