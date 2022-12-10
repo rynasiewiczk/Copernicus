@@ -444,8 +444,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Leo
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1c5bee7e1c3a34c11b3f22f53f31516a, type: 2}
+  m_sharedMaterial: {fileID: 8660036037514152559, guid: 1c5bee7e1c3a34c11b3f22f53f31516a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -475,7 +475,7 @@ MonoBehaviour:
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 100
-  m_fontStyle: 3
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -579,8 +579,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Lorem ipsum doner kebab,
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1c5bee7e1c3a34c11b3f22f53f31516a, type: 2}
+  m_sharedMaterial: {fileID: 8660036037514152559, guid: 1c5bee7e1c3a34c11b3f22f53f31516a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -610,7 +610,7 @@ MonoBehaviour:
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 50
-  m_fontStyle: 3
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -806,56 +806,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _closeButton: {fileID: 861985527387514811}
-  _showDuration: 0.3
-  _hideDuration: 0.3
-  _showCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0.4
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: -0.5201391
-      outSlope: -0.5201391
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.09270215
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _hideCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0.69319105
-      outSlope: 0.69319105
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.13582939
-    - serializedVersion: 3
-      time: 1.0019531
-      value: 0.4
-      inSlope: -1.5682453
-      outSlope: -1.5682453
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.062974125
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   _animationData:
     _showDuration: 0.3
     _hideDuration: 0.3
@@ -907,7 +857,6 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    _hiddenScale: 0.4
 --- !u!1 &2543418703752166587
 GameObject:
   m_ObjectHideFlags: 0
@@ -1229,8 +1178,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: X
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1c5bee7e1c3a34c11b3f22f53f31516a, type: 2}
+  m_sharedMaterial: {fileID: 8660036037514152559, guid: 1c5bee7e1c3a34c11b3f22f53f31516a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1254,7 +1203,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 62.7
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1

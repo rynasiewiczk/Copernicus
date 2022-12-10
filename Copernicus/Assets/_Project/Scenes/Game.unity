@@ -2515,6 +2515,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1418927338}
     m_Modifications:
+    - target: {fileID: 2543418702875633321, guid: 78d0e63bd81314986b4e96e6516a3079, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2543418703463731638, guid: 78d0e63bd81314986b4e96e6516a3079, type: 3}
       propertyPath: m_Name
       value: LexiconWindow
@@ -2603,6 +2607,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7969671986076215398, guid: 78d0e63bd81314986b4e96e6516a3079, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 1c5bee7e1c3a34c11b3f22f53f31516a, type: 2}
+    - target: {fileID: 7969671986076215398, guid: 78d0e63bd81314986b4e96e6516a3079, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 8660036037514152559, guid: 1c5bee7e1c3a34c11b3f22f53f31516a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2660,6 +2672,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2627108267124069984, guid: e5af51282d2ba4b67bc3d3e28cccb1c5, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 1c5bee7e1c3a34c11b3f22f53f31516a, type: 2}
+    - target: {fileID: 2627108267124069984, guid: e5af51282d2ba4b67bc3d3e28cccb1c5, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 8660036037514152559, guid: 1c5bee7e1c3a34c11b3f22f53f31516a, type: 2}
+    - target: {fileID: 3564953131514621794, guid: e5af51282d2ba4b67bc3d3e28cccb1c5, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 8660036037514152559, guid: 1c5bee7e1c3a34c11b3f22f53f31516a, type: 2}
+    - target: {fileID: 5243994377846411172, guid: e5af51282d2ba4b67bc3d3e28cccb1c5, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 1c5bee7e1c3a34c11b3f22f53f31516a, type: 2}
+    - target: {fileID: 5243994377846411172, guid: e5af51282d2ba4b67bc3d3e28cccb1c5, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9033334928482723160, guid: e5af51282d2ba4b67bc3d3e28cccb1c5, type: 3}
       propertyPath: m_Name
       value: StackController
@@ -2669,9 +2701,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8725708238718334125, guid: e5af51282d2ba4b67bc3d3e28cccb1c5, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 8408064466142889696, guid: e5af51282d2ba4b67bc3d3e28cccb1c5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: e5af51282d2ba4b67bc3d3e28cccb1c5, type: 3}
