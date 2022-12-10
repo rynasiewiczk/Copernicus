@@ -1,10 +1,13 @@
 namespace _Project.Scripts.Constellations
 {
+    using DG.Tweening;
     using UnityEngine;
 
     public class ConstellationPart : MonoBehaviour
     {
-        [SerializeField] private GameObject _validView;
+        [SerializeField] private SpriteRenderer _validView;
+
+        private Tweener _validTween;
         
         public Vector2Int GetGridPosition()
         {
@@ -20,10 +23,21 @@ namespace _Project.Scripts.Constellations
             return new Vector2Int(x, y);
         }
 
+        private bool _isValid = true;
         public void SetValid(bool valid)
         {
-            _validView.SetActive(valid);
-            //transform.localScale = valid ? Vector3.one  * 2f : Vector3.one;
+            if (valid && !_isValid)
+            {
+                _isValid = true;
+                _validTween?.Kill();
+                _validTween = _validView.DOFade(1f, 0.3f);
+            }
+            else if(!valid && _isValid)
+            {
+                _isValid = false;
+                _validTween?.Kill();
+                _validTween = _validView.DOFade(0f, 0.3f);
+            }
         }
     }
 }

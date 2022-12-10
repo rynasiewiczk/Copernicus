@@ -1,8 +1,11 @@
 namespace _Project.Scripts.UI
 {
+    using System;
     using System.Linq;
+    using DG.Tweening;
     using Sirenix.OdinInspector;
     using UnityEngine;
+    using Random = System.Random;
 
     public class PickableGroupSlot : MonoBehaviour
     {
@@ -35,6 +38,19 @@ namespace _Project.Scripts.UI
             }
 
             PlayerController.Instance.TryPickUpDraggable(Group);
+        }
+
+        private void OnMouseEnter()
+        {
+            if(PlayerController.Instance.HasDraggable) { return; }
+            if(GameController.Instance.HasInteractionIgnoreReason) { return;}
+
+            _container.DOScale(0.7f, 0.3f);
+        }
+
+        private void OnMouseExit()
+        {
+            _container.DOScale(0.5f, 0.3f);
         }
 
         public void SetGroup(Group group)
