@@ -16,6 +16,8 @@ namespace _Project.Scripts
         [SerializeField] private Color _defaultColor;
         [SerializeField] private Color _pickedUpColor;
 
+        [SerializeField] private List<Sprite> _blockSpritesToUse;
+
         private float _rotationDuration = .15f;
         private float _dropOnMapDuration = .15f;
         private float _bumpDuration = .2f;
@@ -45,10 +47,11 @@ namespace _Project.Scripts
 
         public void Init(int numberOfStars)
         {
+            var spriteToUse = _blockSpritesToUse.OrderBy(x => Guid.NewGuid()).First();
             var blocksInRandom = _blocks.OrderBy(x => Guid.NewGuid()).ToList();
             for (var i = 0; i < blocksInRandom.Count; i++)
             {
-                blocksInRandom[i].Init(i < numberOfStars);
+                blocksInRandom[i].Init(spriteToUse, i < numberOfStars);
             }
         }
 
