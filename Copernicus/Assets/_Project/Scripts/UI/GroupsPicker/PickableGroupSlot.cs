@@ -4,6 +4,7 @@ namespace _Project.Scripts.UI
     using LazySloth.Utilities;
     using Sirenix.OdinInspector;
     using UnityEngine;
+    using UnityEngine.EventSystems;
 
     public class PickableGroupSlot : MonoBehaviour
     {
@@ -72,8 +73,13 @@ namespace _Project.Scripts.UI
             Group = null;
         }
 
-        private void TryPickUpGroup()
+        private void TryPickUpGroup(PointerEventData eventData)
         {
+            if (eventData.button != PointerEventData.InputButton.Left)
+            {
+                return;
+            }
+            
             if (!HasNotDroppedGroup)
             {
                 return;

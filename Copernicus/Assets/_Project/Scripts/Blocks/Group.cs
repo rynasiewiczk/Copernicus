@@ -36,9 +36,9 @@ namespace _Project.Scripts
             }
         }
 
-        public void RotateLeft() => transform.eulerAngles += Vector3.left * 90;
+        public void RotateLeft() => transform.eulerAngles += new Vector3(0, 0, -90);
 
-        public void RotateRight() => transform.eulerAngles += Vector3.right * 90;
+        public void RotateRight() => transform.eulerAngles += new Vector3(0, 0, 90);
 
         public void ResetRotation() => transform.eulerAngles = Vector3.zero;
 
@@ -62,7 +62,7 @@ namespace _Project.Scripts
                 block.SetColor(canPutOnBoard ? _validPlaceColor : _invalidPlaceColor);
             }
         }
-        
+
         public void SetActive(bool active) => gameObject.SetActive(active);
 
         ///////////
@@ -77,7 +77,7 @@ namespace _Project.Scripts
         {
             _blocks.Clear();
             _blocks = GetComponentsInChildren<Block>().ToList();
-            
+
             foreach (var block in _blocks)
             {
                 block.Validate();

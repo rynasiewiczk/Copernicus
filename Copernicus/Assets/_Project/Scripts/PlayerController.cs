@@ -10,7 +10,7 @@ namespace _Project.Scripts
         public event Action<Group> OnUnpickedGroup;
 
         [SerializeField] private Camera _gameplayCamera;
-        
+
         private Group _currentGroup;
 
         public Group CurrentGroup => _currentGroup;
@@ -37,10 +37,19 @@ namespace _Project.Scripts
             {
                 TryPutOnBoard();
             }
-            
+
             else if (Input.GetMouseButtonDown(1))
             {
                 Unpick();
+            }
+
+            else if (Input.GetKeyDown(KeyCode.Q))
+            {
+                TryRotateLeft();
+            }
+            else if (Input.GetKeyDown(KeyCode.E))
+            {
+                TryRotateRight();
             }
         }
 
@@ -60,7 +69,7 @@ namespace _Project.Scripts
             {
                 return false;
             }
-            
+
             var canPutOnBoard = BoardController.Instance.IsPositionValidForGroup(_currentGroup);
             _currentGroup.SetOverBoardValidPositionView(canPutOnBoard);
             return canPutOnBoard;
@@ -85,9 +94,30 @@ namespace _Project.Scripts
             {
                 return;
             }
-            
+
+            _currentGroup.ResetRotation();
             OnUnpickedGroup?.Invoke(_currentGroup);
             _currentGroup = null;
+        }
+
+        private void TryRotateLeft()
+        {
+            if (_currentGroup == null)
+            {
+                return;
+            }
+
+            _currentGroup.RotateLeft();
+        }
+
+        private void TryRotateRight()
+        {
+            if (_currentGroup == null)
+            {
+                return;
+            }
+
+            _currentGroup.RotateRight();
         }
     }
 }

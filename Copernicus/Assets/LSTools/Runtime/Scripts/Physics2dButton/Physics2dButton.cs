@@ -11,15 +11,15 @@
     [RequireComponent(typeof(Collider2D))]
     public class Physics2dButton : MonoBehaviour, IPointerClickHandler
     {
-        public event Action OnClicked;
-        protected virtual void FireClicked() => OnClicked?.Invoke();
+        public event Action<PointerEventData> OnClicked;
+        protected virtual void FireClicked(PointerEventData eventData) => OnClicked?.Invoke(eventData);
 
         private bool _interactable = true;
         
         public void OnPointerClick(PointerEventData eventData)
         {
             if(!_interactable) { return; }
-            FireClicked();
+            FireClicked(eventData);
         }
 
         public void SetInteractable(bool interactable) => _interactable = interactable;
