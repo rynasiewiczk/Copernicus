@@ -22,10 +22,28 @@ namespace _Project.Scripts
         private float _dropOnMapDuration = .15f;
         private float _bumpDuration = .2f;
 
+        private List<Block> _runtimeBlocks;
         public Transform Root => gameObject.transform;
         public ObservableProperty<bool> IsDragged { get; } = new();
-        public IReadOnlyList<Block> Blocks => _blocks;
+
+        public IReadOnlyList<Block> Blocks
+        {
+            get
+            {
+                if (_runtimeBlocks == null)
+                {
+                    _runtimeBlocks = _blocks.ToList();
+                }
+
+                return _runtimeBlocks;
+            }
+        }
         public bool IsOnMap => _blocks.Any(x => x.IsOnMap);
+
+        private void Awake()
+        {
+            var blocks = Blocks; //get to auto assign
+        }
 
         private void OnEnable()
         {
@@ -51,8 +69,13 @@ namespace _Project.Scripts
             var blocksInRandom = _blocks.OrderBy(x => Guid.NewGuid()).ToList();
             for (var i = 0; i < blocksInRandom.Count; i++)
             {
-                blocksInRandom[i].Init(spriteToUse, i < numberOfStars);
+                blocksInRandom[i].Init(spriteToUse, i < numberOfStars, this);
             }
+        }
+
+        public void RemoveBlock(Block block)
+        {
+            _runtimeBlocks.Remove(block);
         }
 
         public void DropOnMap(bool silent = false)

@@ -1,6 +1,5 @@
 namespace _Project.Scripts
 {
-    using CarterGames.Assets.AudioManager;
     using DG.Tweening;
     using Sirenix.OdinInspector;
     using UnityEngine;
@@ -17,14 +16,23 @@ namespace _Project.Scripts
         public bool IsOnMap { get; private set; }
         public bool HasStar { get; private set; }
 
-        public void Init(Sprite sprite, bool hasStar)
+        private Group _group;
+
+        public void Init(Sprite sprite, bool hasStar, Group group)
         {
+            _group = group;
             _spriteRenderer.sprite = sprite;
             HasStar = hasStar;
             if (hasStar)
             {
                 BlockStar = Instantiate(_blockStarPrefab, _starContainer.transform, false);
             }
+        }
+
+        public void Destroy()
+        {
+            _group.RemoveBlock(this);
+            Destroy(gameObject);
         }
 
         public Vector2Int GetGridPosition()

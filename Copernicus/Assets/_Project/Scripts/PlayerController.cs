@@ -4,6 +4,7 @@ namespace _Project.Scripts
     using Constellations;
     using DG.Tweening;
     using Effects;
+    using Hammer;
     using LazySloth.Utilities;
     using Sirenix.OdinInspector;
     using UnityEngine;
@@ -97,6 +98,13 @@ namespace _Project.Scripts
                     BoardController.Instance.PutConstellationOnBoard(constellation);
                 }
 
+                if (_currentDraggable is HammerObject hammerObject)
+                {
+                    BoardController.Instance.UseHammerOnBoard(hammerObject);
+                    Unpick(true);
+                    return;
+                }
+
                 _currentDraggable.Root.ChangeLayerToDefault();
                 _currentDraggable.IsDragged.Value = false;
                 _currentDraggable = null;
@@ -129,6 +137,12 @@ namespace _Project.Scripts
                 return canPutOnBoard;
             }
 
+            if (_currentDraggable is HammerObject hammer)
+            {
+                var canPutOnBoard = BoardController.Instance.IsPositionValidForHammer(hammer);
+                return canPutOnBoard;
+            }
+
             return false;
         }
 
@@ -145,9 +159,9 @@ namespace _Project.Scripts
         }
 
         [Button]
-        public void Unpick()
+        public void Unpick(bool force = false)
         {
-            if (_currentDraggable == null || GameController.Instance.HasInteractionIgnoreReason)
+            if (!force && (_currentDraggable == null || GameController.Instance.HasInteractionIgnoreReason))
             {
                 return;
             }

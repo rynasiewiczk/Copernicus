@@ -4,6 +4,7 @@ namespace _Project.Scripts
     using System.Linq;
     using Constellations;
     using DG.Tweening;
+    using Hammer;
     using UnityEngine;
 
     public class BoardController : SingletonBehaviour<BoardController>
@@ -139,6 +140,33 @@ namespace _Project.Scripts
             }
         }
 
+        public void UseHammerOnBoard(HammerObject hammerObject)
+        {
+            TryGetBlockAtPosition(hammerObject.GetGridPosition(), out var block);
+            block.Destroy();
+            _blocksOnBoard.Remove(block);
+        }
+
+        public bool IsPositionValidForHammer(HammerObject hammerObject)
+        {
+            if (_blocksOnBoard.Count <= 1)
+            {
+                return false;
+            }
+            
+            if (TryGetBlockAtPosition(hammerObject.GetGridPosition(), out var block))
+            {
+                if (block.HasStar && block.BlockStar.IsAlreadyUsed)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+        
         public bool IsConstellationPossibleToPutOnBoard(Constellation constellation)
         {
             var startingPart = constellation.Parts.First();
