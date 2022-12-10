@@ -62,7 +62,6 @@ namespace _Project.Scripts.UI
 
             Group.SetParent(_container);
             CenterGroup(bump);
-            Group.ResetColor();
         }
 
         private void CenterGroup(bool bump)
