@@ -31,6 +31,12 @@ namespace _Project.Scripts.Constellations
             gameObject.SetActive(active);
         }
 
+        public void SetParentAndScale(Transform parent, Vector3 scale)
+        {
+            transform.SetParent(parent);
+            transform.localScale = scale;
+        }
+        
         public void SetParent(Transform container)
         {
             transform.SetParent(container, false);

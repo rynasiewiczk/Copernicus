@@ -27,6 +27,7 @@ namespace _Project.Scripts
 
             _currentDraggable = draggable;
             _currentDraggable.Root.ChangeLayerToAboveDesk();
+            _currentDraggable.SetParentAndScale(null, Vector3.one);
             return true;
         }
 

@@ -52,6 +52,11 @@ namespace _Project.Scripts
         public void RotateRight() => transform.eulerAngles += new Vector3(0, 0, 90);
 
         public void ResetRotation() => transform.eulerAngles = Vector3.zero;
+        public void SetParentAndScale(Transform parent, Vector3 scale)
+        {
+            transform.SetParent(parent);
+            transform.localScale = scale;
+        }
 
         public void SetParent(Transform parent)
         {
