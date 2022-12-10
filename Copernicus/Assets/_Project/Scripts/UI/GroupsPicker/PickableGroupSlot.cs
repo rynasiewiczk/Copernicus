@@ -74,11 +74,12 @@ namespace _Project.Scripts.UI
 
         private void TryPickUpGroup()
         {
-            var didPickUp = PlayerController.Instance.TryPickUpGroup(Group);
-            if (didPickUp)
+            if (!HasNotDroppedGroup)
             {
-                //HideGroup();
+                return;
             }
+            
+            PlayerController.Instance.TryPickUpGroup(Group);
         }
 
         //debug

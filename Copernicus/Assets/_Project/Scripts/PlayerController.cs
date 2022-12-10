@@ -32,22 +32,38 @@ namespace _Project.Scripts
             MoveGroupWithCursor();
 
             CheckIfCanPutOnBoard();
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                TryPutOnBoard();
+            }
             
-            if (Input.GetMouseButtonDown(1))
+            else if (Input.GetMouseButtonDown(1))
             {
                 Unpick();
             }
         }
 
-        private void CheckIfCanPutOnBoard()
+        private void TryPutOnBoard()
+        {
+            var canPutOnBoard = CheckIfCanPutOnBoard();
+            if (canPutOnBoard)
+            {
+                BoardController.Instance.PutGroupOnBoard(_currentGroup);
+                _currentGroup = null;
+            }
+        }
+
+        private bool CheckIfCanPutOnBoard()
         {
             if (_currentGroup == null)
             {
-                return;
+                return false;
             }
             
             var canPutOnBoard = BoardController.Instance.IsPositionValidForGroup(_currentGroup);
             _currentGroup.SetOverBoardValidPositionView(canPutOnBoard);
+            return canPutOnBoard;
         }
 
         private void MoveGroupWithCursor()
@@ -67,7 +83,6 @@ namespace _Project.Scripts
         {
             if (_currentGroup == null)
             {
-                Debug.LogError("There is no group to unpick");
                 return;
             }
             
