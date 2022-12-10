@@ -19,7 +19,7 @@ namespace _Project.Scripts.Constellations
 
         [SerializeField] private Sprite _icon;
         [SerializeField] private string _name;
-        [SerializeField] private string _description;
+        [SerializeField, TextArea] private string _description;
 
         [SerializeField] private float _fadeOutDuration = .3f;
         [SerializeField] private LineRendererConnection _droppedConnectionLinePrefab;
