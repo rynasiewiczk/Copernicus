@@ -2422,17 +2422,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1418927338}
     m_Modifications:
-    - target: {fileID: 2543418702875633321, guid: 78d0e63bd81314986b4e96e6516a3079, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 40
-      objectReference: {fileID: 0}
     - target: {fileID: 2543418703463731638, guid: 78d0e63bd81314986b4e96e6516a3079, type: 3}
       propertyPath: m_Name
       value: LexiconWindow
-      objectReference: {fileID: 0}
-    - target: {fileID: 2543418703463731638, guid: 78d0e63bd81314986b4e96e6516a3079, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2543418703463731641, guid: 78d0e63bd81314986b4e96e6516a3079, type: 3}
       propertyPath: m_Pivot.x
