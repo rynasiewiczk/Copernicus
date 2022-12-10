@@ -3,6 +3,7 @@ namespace _Project.Scripts
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using CarterGames.Assets.AudioManager;
     using Constellations;
     using DG.Tweening;
     using UnityEngine;
@@ -149,6 +150,8 @@ namespace _Project.Scripts
         {
             if(_groupsToShow.Any()) { return; }
             if(_currentConstellations.Any(x => x.IsPossibleToPutOnBoard)) { return; }
+
+            AudioManager.instance.Play("finish_game");
 
             var allPositions = BoardController.Instance.BlocksOnBoard.Select(x => x.GetGridPosition()).ToList();
             var byX = allPositions.OrderBy(v => v.x).ToList();

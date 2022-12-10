@@ -24,3 +24,15 @@ MonoBehaviour:
     value: {fileID: 8300000, guid: 0f35d0da0c3232a498e0e585f3e77691, type: 3}
   - key: epic-place
     value: {fileID: 8300000, guid: ffbed72e93b4f4c57911a64cea8703a4, type: 3}
+  - key: finish_game
+    value: {fileID: 8300000, guid: bbf12bdd3cdee447f82575e9be6a06bf, type: 3}
+  - key: group_fit
+    value: {fileID: 8300000, guid: 0e72f3e8a5a23459fa444de5f4f68a13, type: 3}
+  - key: group_rotation
+    value: {fileID: 8300000, guid: 1c81d66dcba7f4400ac06d042927f4e2, type: 3}
+  - key: hoover_in
+    value: {fileID: 8300000, guid: 09eedeeb1e85545c7a6a78a60234a6e1, type: 3}
+  - key: hoover_in_2fd
+    value: {fileID: 8300000, guid: 1a8a01069a56e4c0dadb830dfa6bd386, type: 3}
+  - key: hoover_out
+    value: {fileID: 8300000, guid: d346a9cea044e418d8992048fd4e6b63, type: 3}

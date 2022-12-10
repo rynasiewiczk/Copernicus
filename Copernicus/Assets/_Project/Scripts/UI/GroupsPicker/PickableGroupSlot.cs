@@ -1,11 +1,10 @@
 namespace _Project.Scripts.UI
 {
-    using System;
     using System.Linq;
+    using CarterGames.Assets.AudioManager;
     using DG.Tweening;
     using Sirenix.OdinInspector;
     using UnityEngine;
-    using Random = System.Random;
 
     public class PickableGroupSlot : MonoBehaviour
     {
@@ -13,6 +12,8 @@ namespace _Project.Scripts.UI
 
         [SerializeField] private float _offset = -.5f;
 
+        private bool _isHooveredIn;
+        
         public Group Group { get; private set; }
 
         public bool HasNotDroppedGroup => Group != null && !Group.IsOnMap;
@@ -45,11 +46,20 @@ namespace _Project.Scripts.UI
             if(PlayerController.Instance.HasDraggable) { return; }
             if(GameController.Instance.HasInteractionIgnoreReason) { return;}
 
+            _isHooveredIn = true;
+            AudioManager.instance.Play("hoover_in");
+
             _container.DOScale(0.7f, 0.3f);
         }
 
         private void OnMouseExit()
         {
+            if (_isHooveredIn && !Group.IsDragged.Value)
+            {
+                _isHooveredIn = false;
+                AudioManager.instance.Play("hoover_out");
+            }
+
             _container.DOScale(0.5f, 0.3f);
         }
 

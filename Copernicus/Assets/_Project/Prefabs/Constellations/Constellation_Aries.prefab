@@ -390,7 +390,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5534661543418241272, guid: 1a5d44005bb2e40399cf95a95f40d51d, type: 3}
       propertyPath: _description
-      value: Aries is derived from the God of War, Ares. He is described as, "murderous,
+      value: Aries is derived from the God of War, Kratos. He is described as, "murderous,
         bloodthirsty, the incarnate curse of mortals; and, strangely, a coward".
       objectReference: {fileID: 0}
     - target: {fileID: 5534661543418241272, guid: 1a5d44005bb2e40399cf95a95f40d51d, type: 3}
