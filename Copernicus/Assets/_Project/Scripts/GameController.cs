@@ -9,6 +9,7 @@ namespace _Project.Scripts
 
     public class GameController : SingletonBehaviour<GameController>
     {
+        public event Action<int> OnGroupsCreated;
         public event Action<Group> OnGroupShowing;
         public event Action<Constellation> OnConstellationShowing; 
 
@@ -102,6 +103,8 @@ namespace _Project.Scripts
                 newGroup.Init(numberOfStars);
                 _groupsQueue.Enqueue(newGroup);
             }
+            
+            OnGroupsCreated?.Invoke(groupsCount);
         }
 
         private void RefreshConstellationsPossibility()
