@@ -4,6 +4,7 @@ namespace _Project.Scripts.Constellations
     using System.Collections.Generic;
     using DG.Tweening;
     using Effects;
+    using LazySloth.Observable;
     using Sirenix.OdinInspector;
     using Unity.VisualScripting;
     using UnityEngine;
@@ -29,6 +30,7 @@ namespace _Project.Scripts.Constellations
         public bool IsPossibleToPutOnBoard { get; private set; }
 
         public Transform Root => gameObject.transform;
+        public ObservableProperty<bool> IsDragged { get; } = new();
         public IReadOnlyList<ConstellationPart> Parts => _parts;
         public IReadOnlyList<ConstellationConnection> Connections => _connections;
 

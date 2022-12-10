@@ -4,6 +4,7 @@ namespace _Project.Scripts
     using System.Collections.Generic;
     using System.Linq;
     using DG.Tweening;
+    using LazySloth.Observable;
     using Sirenix.OdinInspector;
     using UnityEngine;
 
@@ -12,16 +13,34 @@ namespace _Project.Scripts
         [SerializeField] private List<Block> _blocks;
 
         [SerializeField] private Color _defaultColor;
-        [SerializeField] private Color _invalidPlaceColor;
-        [SerializeField] private Color _validPlaceColor;
+        [SerializeField] private Color _pickedUpColor;
 
         private float _rotationDuration = .15f;
         private float _dropOnMapDuration = .15f;
         private float _bumpDuration = .2f;
 
         public Transform Root => gameObject.transform;
+        public ObservableProperty<bool> IsDragged { get; } = new();
         public IReadOnlyList<Block> Blocks => _blocks;
         public bool IsOnMap => _blocks.Any(x => x.IsOnMap);
+
+        private void OnEnable()
+        {
+            IsDragged.Subscribe(SetColorForDrag);
+        }
+
+        private void OnDisable()
+        {
+            IsDragged.Unsubscribe(SetColorForDrag);
+        }
+
+        private void SetColorForDrag(bool isDragged)
+        {
+            foreach (var block in _blocks)
+            {
+                block.SetColor(isDragged ? _pickedUpColor : _defaultColor);
+            }
+        }
 
         public void Init(int numberOfStars)
         {
@@ -88,8 +107,6 @@ namespace _Project.Scripts
             transform.SetParent(parent, false);
         }
 
-        public void ResetColor() => _blocks.ForEach(x => x.SetColor(_defaultColor));
-
         public void SetWorldPosition(Vector3 position)
         {
             transform.position = position;
@@ -98,14 +115,6 @@ namespace _Project.Scripts
         public void SetLocalPosition(Vector3 position)
         {
             transform.localPosition = position;
-        }
-        
-        public void SetOverBoardValidPositionView(bool canPutOnBoard)
-        {
-            foreach (var block in _blocks)
-            {
-                block.SetColor(canPutOnBoard ? _validPlaceColor : _invalidPlaceColor);
-            }
         }
 
         public void SetActive(bool active) => gameObject.SetActive(active);

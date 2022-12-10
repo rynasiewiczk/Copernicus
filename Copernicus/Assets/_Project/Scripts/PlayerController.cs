@@ -3,9 +3,9 @@ namespace _Project.Scripts
     using System;
     using Constellations;
     using DG.Tweening;
+    using Effects;
     using LazySloth.Utilities;
     using Sirenix.OdinInspector;
-    using UI;
     using UnityEngine;
     using Utils;
 
@@ -30,6 +30,7 @@ namespace _Project.Scripts
             SetChangeDraggableFlag();
 
             _currentDraggable = draggable;
+            _currentDraggable.IsDragged.Value = true;
             _currentDraggable.Root.ChangeLayerToAboveDesk();
             _currentDraggable.SetParentAndScale(null, Vector3.one);
 
@@ -40,7 +41,15 @@ namespace _Project.Scripts
         {
             MoveGroupWithCursor();
 
-            CheckIfCanPutOnBoard();
+            var canPutOnBoard = CheckIfCanPutOnBoard();
+            if (canPutOnBoard && _currentDraggable is Group g)
+            {
+                GridBlocksHighlightEffectController.Instance.SetForGroup(g);
+            }
+            else
+            {
+                GridBlocksHighlightEffectController.Instance.Clear();
+            }
 
             if (Input.GetMouseButtonDown(0))
             {
@@ -88,6 +97,7 @@ namespace _Project.Scripts
                 }
 
                 _currentDraggable.Root.ChangeLayerToDefault();
+                _currentDraggable.IsDragged.Value = false;
                 _currentDraggable = null;
             }
         }
@@ -107,7 +117,6 @@ namespace _Project.Scripts
             if (_currentDraggable is Group group)
             {
                 var canPutOnBoard = BoardController.Instance.IsPositionValidForGroup(group);
-                group.SetOverBoardValidPositionView(canPutOnBoard);
                 return canPutOnBoard;
             }
 
@@ -150,6 +159,7 @@ namespace _Project.Scripts
                 constellation.ResetPartsState();
             }
             OnUnpickedDraggable?.Invoke(_currentDraggable);
+            _currentDraggable.IsDragged.Value = false;
             _currentDraggable = null;
         }
 
