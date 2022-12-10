@@ -21,7 +21,7 @@ namespace _Project.Scripts
         [Button]
         public void SetupPosition()
         {
-            _uiBlocks = GetComponentsInChildren<UiBlock>().ToList();
+            _uiBlocks = GetComponentsInChildren<UiBlock>(true).ToList();
 
             var rows = GetRowsCount();
             var columns = GetColumnsCount();
@@ -44,17 +44,12 @@ namespace _Project.Scripts
             return countY;
         }
 
-        public void Initialize([CanBeNull] Group group)
+        public void Initialize( Group group)
         {
             _group = group;
 
             _uiBlocks.ForEach(x => x.SetActive(false));
 
-            if (group == null)
-            {
-                return;
-            }
-            
             foreach (var groupBlock in group.Blocks)
             {
                 var pos = groupBlock.GetGridPosition();
@@ -66,8 +61,15 @@ namespace _Project.Scripts
                 }
 
                 uiBlock.SetActive(true);
-                SetupPosition();
             }
+            
+            SetupPosition();
+        }
+
+        public void Reset()
+        {
+            _group = null;
+            _uiBlocks.ForEach(x => x.SetActive(false));
         }
     }
 }

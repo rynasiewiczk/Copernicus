@@ -15,7 +15,7 @@ namespace _Project.Scripts.UI
 
         public UiGroup UiGroup => _uiGroup;
 
-        public bool HasGroup => UiGroup != null;
+        public bool HasGroup => UiGroup.Group != null;
 
         private void OnEnable()
         {
@@ -29,9 +29,14 @@ namespace _Project.Scripts.UI
             PlayerController.instance.OnUnpickedGroup -= ShowGroup;
         }
 
-        public void SetGroup([CanBeNull] Group group)
+        public void SetGroup(Group group)
         {
             _uiGroup.Initialize(group);
+        }
+
+        public void ResetGroup()
+        {
+            _uiGroup.Reset();
         }
 
         private void TryPickUpGroup()
@@ -55,7 +60,7 @@ namespace _Project.Scripts.UI
 
         public void Clear()
         {
-            SetGroup(null);
+            ResetGroup();
         }
     }
 }
