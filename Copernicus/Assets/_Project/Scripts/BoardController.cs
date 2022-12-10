@@ -215,7 +215,7 @@ namespace _Project.Scripts
             }
         }
         
-        private bool TryGetBlockAtPosition(Vector2Int gridPosition, out Block block)
+        public bool TryGetBlockAtPosition(Vector2Int gridPosition, out Block block)
         {
             foreach (var blockOnBoard in _blocksOnBoard)
             {

@@ -10,6 +10,7 @@ namespace _Project.Scripts
         [SerializeField] private BlockStar _blockStarPrefab;
 
         [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] private SpriteRenderer _highlightRenderer;
         
         public BlockStar BlockStar { get; private set; }
 
@@ -20,6 +21,7 @@ namespace _Project.Scripts
 
         public void Init(Sprite sprite, bool hasStar, Group group)
         {
+            Highlight(false);
             _group = group;
             _spriteRenderer.sprite = sprite;
             HasStar = hasStar;
@@ -33,6 +35,11 @@ namespace _Project.Scripts
         {
             _group.RemoveBlock(this);
             Destroy(gameObject);
+        }
+
+        public void Highlight(bool highlight)
+        {
+            _highlightRenderer.gameObject.SetActive(highlight);
         }
 
         public Vector2Int GetGridPosition()
