@@ -2,6 +2,7 @@ namespace _Project.Scripts
 {
     using System;
     using Constellations;
+    using DG.Tweening;
     using LazySloth.Utilities;
     using Sirenix.OdinInspector;
     using UnityEngine;
@@ -18,19 +19,24 @@ namespace _Project.Scripts
         public IDraggable CurrentDraggable => _currentDraggable;
         public bool HasDraggable => CurrentDraggable != null;
 
+        private bool _didJustChangeDraggable;
+
         public bool TryPickUpDraggable(IDraggable draggable)
         {
-            if (HasDraggable)
+            if (HasDraggable || _didJustChangeDraggable)
             {
                 return false;
             }
 
+            SetChangeDraggableFlag();
+
             _currentDraggable = draggable;
             _currentDraggable.Root.ChangeLayerToAboveDesk();
             _currentDraggable.SetParentAndScale(null, Vector3.one);
+            
             return true;
         }
-
+        
         private void Update()
         {
             // if (Input.GetKeyDown(KeyCode.A))
@@ -56,20 +62,27 @@ namespace _Project.Scripts
             {
                 if (Input.GetKeyDown(KeyCode.Q))
                 {
-                    TryRotateLeft(group);
+                    TryRotateRight(group);
                 }
                 else if (Input.GetKeyDown(KeyCode.E))
                 {
-                    TryRotateRight(group);
+                    TryRotateLeft(group);
                 }
             }
         }
 
         private void TryPutOnBoard()
         {
+            if (_didJustChangeDraggable)
+            {
+                return;
+            }
+            
             var canPutOnBoard = CheckIfCanPutOnBoard();
             if (canPutOnBoard)
             {
+                SetChangeDraggableFlag();
+
                 if (_currentDraggable is Group group)
                 {
                     BoardController.Instance.PutGroupOnBoard(group);
@@ -123,10 +136,12 @@ namespace _Project.Scripts
         [Button]
         public void Unpick()
         {
-            if (_currentDraggable == null)
+            if (_currentDraggable == null || _didJustChangeDraggable)
             {
                 return;
             }
+
+            SetChangeDraggableFlag();
 
             _currentDraggable.Root.ChangeLayerToDesk();
             _currentDraggable.ResetRotation();
@@ -134,6 +149,12 @@ namespace _Project.Scripts
             _currentDraggable = null;
         }
 
+        private void SetChangeDraggableFlag()
+        {
+            _didJustChangeDraggable = true;
+            DOVirtual.DelayedCall(.1f, () => _didJustChangeDraggable = false);
+        }
+        
         private void TryRotateLeft(Group group)
         {
             group.RotateLeft();
