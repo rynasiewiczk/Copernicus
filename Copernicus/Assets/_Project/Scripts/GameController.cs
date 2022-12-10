@@ -2,21 +2,31 @@ namespace _Project.Scripts
 {
     using System.Collections.Generic;
     using System.Linq;
+    using Constellations;
     using UnityEngine;
 
     public class GameController : SingletonBehaviour<GameController>
     {
+        [Header("Groups")]
         [SerializeField] private GroupsCatalog _groupsCatalog;
         [SerializeField] private int _initialGroupsSize = 10;
         [SerializeField] private int _maxGropusToShow = 3;
 
+        [Header("Constellations")]
+        [SerializeField] private ConstellationsCatalog _constellationsCatalog;
+        [SerializeField] private int _maxConstellations = 3;
+
         private readonly Queue<Group> _groupsQueue = new();
-        private List<Group> _groupsToShow = new();
+        private readonly List<Group> _groupsToShow = new();
+
+        private readonly List<Constellation> _currentConstellations = new();
 
         public int GroupsQueueCount => _groupsQueue.Count;
-        
+
         private void Start() //start game
         {
+            FillUpConstellations();
+            
             CreateGroups(_initialGroupsSize);
             FillUpGroupsToShow();
         }
@@ -25,6 +35,14 @@ namespace _Project.Scripts
         {
             _groupsToShow.Remove(group);
             FillUpGroupsToShow();
+        }
+
+        public void PutConstellationOnMap(Constellation constellation)
+        {
+            _currentConstellations.Remove(constellation);
+            CreateGroups(2); //todo: define based on constellations
+            FillUpGroupsToShow();
+            FillUpConstellations();
         }
 
         private void FillUpGroupsToShow()
@@ -36,8 +54,19 @@ namespace _Project.Scripts
                 {
                     var group = _groupsQueue.Dequeue();
                     _groupsToShow.Add(group);
-                    //refresh ui
+                    //refresh ui?
                 }
+            }
+        }
+
+        private void FillUpConstellations()
+        {
+            var missingConstellations = _maxConstellations - _currentConstellations.Count;
+            for (var i = 0; i < missingConstellations; i++)
+            {
+                var constellation = _constellationsCatalog.GetRandomConstellation();
+                var newConstellation = Instantiate(constellation);
+                _currentConstellations.Add(newConstellation);
             }
         }
         
