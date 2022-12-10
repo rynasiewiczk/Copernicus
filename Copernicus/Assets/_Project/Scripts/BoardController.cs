@@ -31,6 +31,7 @@ namespace _Project.Scripts
         {
             var singleElementGroupPrefab = _groupsCatalog.SingleElementGroup;
             var instance = Instantiate(singleElementGroupPrefab);
+            instance.Init(1);
             instance.SetWorldPosition(Vector3.zero);
             PutGroupOnBoard(instance, true);
         }
