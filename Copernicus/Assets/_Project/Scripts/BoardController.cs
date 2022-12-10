@@ -32,7 +32,7 @@ namespace _Project.Scripts
             var singleElementGroupPrefab = _groupsCatalog.SingleElementGroup;
             var instance = Instantiate(singleElementGroupPrefab);
             instance.SetWorldPosition(Vector3.zero);
-            PutGroupOnBoard(instance);
+            PutGroupOnBoard(instance, true);
         }
 
         public bool IsPositionValidForGroup(Group group)
@@ -63,9 +63,9 @@ namespace _Project.Scripts
             return false;
         }
 
-        public void PutGroupOnBoard(Group group)
+        public void PutGroupOnBoard(Group group, bool silent = false)
         {
-            group.DropOnMap();
+            group.DropOnMap(silent);
             
             foreach (var blockInGroup in group.Blocks)
             {

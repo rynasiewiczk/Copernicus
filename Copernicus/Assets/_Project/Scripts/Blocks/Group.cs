@@ -3,6 +3,7 @@ namespace _Project.Scripts
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using CarterGames.Assets.AudioManager;
     using DG.Tweening;
     using LazySloth.Observable;
     using Sirenix.OdinInspector;
@@ -14,6 +15,8 @@ namespace _Project.Scripts
 
         [SerializeField] private Color _defaultColor;
         [SerializeField] private Color _pickedUpColor;
+
+        [SerializeField] private List<Sprite> _blockSpritesToUse;
 
         private float _rotationDuration = .15f;
         private float _dropOnMapDuration = .15f;
@@ -44,15 +47,17 @@ namespace _Project.Scripts
 
         public void Init(int numberOfStars)
         {
+            var spriteToUse = _blockSpritesToUse.OrderBy(x => Guid.NewGuid()).First();
             var blocksInRandom = _blocks.OrderBy(x => Guid.NewGuid()).ToList();
             for (var i = 0; i < blocksInRandom.Count; i++)
             {
-                blocksInRandom[i].Init(i < numberOfStars);
+                blocksInRandom[i].Init(spriteToUse, i < numberOfStars);
             }
         }
 
-        public void DropOnMap()
+        public void DropOnMap(bool silent = false)
         {
+            if(!silent) { AudioManager.instance.Play("epic-object-placing-105779"); }
             var reason = new InteractionIgnoreReason("Placing block");
             GameController.Instance.InteractionIgnoreReasons.Add(reason);
             DOVirtual.DelayedCall(_dropOnMapDuration, () => GameController.Instance.InteractionIgnoreReasons.Remove(reason));

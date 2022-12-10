@@ -47,3 +47,9 @@ MonoBehaviour:
   _blocks: []
   _defaultColor: {r: 1, g: 1, b: 1, a: 1}
   _pickedUpColor: {r: 1, g: 1, b: 1, a: 0.5019608}
+  _blockSpritesToUse:
+  - {fileID: 21300000, guid: 5c0bc5f8ec99f4a3e9ede9a991d6dc0c, type: 3}
+  - {fileID: 21300000, guid: 8fbc0f253df6f465380f78f39a29c05c, type: 3}
+  - {fileID: 21300000, guid: ce688200bd9af496ca2d4cfdceaca09d, type: 3}
+  - {fileID: 21300000, guid: e856010758eed4d25bc1809fbf9bcf78, type: 3}
+  - {fileID: 21300000, guid: 6352a255d10a848be96b91f82da58975, type: 3}
