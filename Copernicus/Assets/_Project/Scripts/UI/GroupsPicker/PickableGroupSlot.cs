@@ -16,18 +16,29 @@ namespace _Project.Scripts.UI
         private void OnEnable()
         {
             _button.OnClicked += TryPickUpGroup;
-            PlayerController.Instance.OnUnpickedGroup += SetGroup;
+            PlayerController.Instance.OnUnpickedGroup += ResetGroupAsChild;
         }
 
         private void OnDisable()
         {
             _button.OnClicked -= TryPickUpGroup;
-            PlayerController.Instance.OnUnpickedGroup -= SetGroup;
+            PlayerController.Instance.OnUnpickedGroup -= ResetGroupAsChild;
         }
 
         public void SetGroup(Group group)
         {
             Group = group;
+            ResetGroupAsChild(Group);
+        }
+
+        private void ResetGroupAsChild(Group _)
+        {
+            if (Group == null)
+            {
+                Debug.LogError("Group is null");
+                return;
+            }
+            
             Group.SetParent(_container);
         }
         

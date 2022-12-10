@@ -59,6 +59,12 @@ namespace _Project.Scripts
         public void SetParent(Transform parent)
         {
             transform.SetParent(parent, false);
+            transform.localPosition = Vector3.zero;
+        }
+
+        public void SetWorldPosition(Vector3 position)
+        {
+            transform.position = position;
         }
     }
 }
