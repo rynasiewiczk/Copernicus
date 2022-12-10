@@ -1,66 +1,58 @@
 namespace _Project.Scripts.UI
 {
-    using System;
-    using JetBrains.Annotations;
+    using LazySloth.Utilities;
+    using Sirenix.OdinInspector;
     using UnityEngine;
-    using UnityEngine.UI;
 
     public class PickableGroupSlot : MonoBehaviour
     {
-        [SerializeField] private Button _button;
-        [SerializeField] private RectTransform _container;
-        [SerializeField] private UiGroup _uiGroup;
+        [SerializeField] private Physics2dButton _button;
+        [SerializeField] private Transform _container;
 
-        [SerializeField] private CanvasGroup _groupCanvasGroup;
+        public Group Group { get; private set; }
 
-        public UiGroup UiGroup => _uiGroup;
-
-        public bool HasGroup => UiGroup.Group != null;
+        public bool HasGroup => Group != null;
 
         private void OnEnable()
         {
-            _button.onClick.AddListener(TryPickUpGroup);
-            PlayerController.instance.OnUnpickedGroup += ShowGroup;
+            _button.OnClicked += TryPickUpGroup;
+            PlayerController.Instance.OnUnpickedGroup += SetGroup;
         }
 
         private void OnDisable()
         {
-            _button.onClick.RemoveListener(TryPickUpGroup);
-            PlayerController.instance.OnUnpickedGroup -= ShowGroup;
+            _button.OnClicked -= TryPickUpGroup;
+            PlayerController.Instance.OnUnpickedGroup -= SetGroup;
         }
 
         public void SetGroup(Group group)
         {
-            _uiGroup.Initialize(group);
+            Group = group;
+            Group.SetParent(_container);
         }
-
-        public void ResetGroup()
+        
+        public void Clear()
         {
-            _uiGroup.Reset();
+            Group = null;
         }
 
         private void TryPickUpGroup()
         {
-            var didPickUp = PlayerController.instance.TryPickUpGroup(UiGroup.Group);
+            var didPickUp = PlayerController.Instance.TryPickUpGroup(Group);
             if (didPickUp)
             {
-                HideGroup();
+                //HideGroup();
             }
         }
 
-        private void HideGroup()
+        //debug
+        [Button]
+        public void DestroyGroup()
         {
-            _groupCanvasGroup.alpha = 0;
-        }
-
-        private void ShowGroup(Group _)
-        {
-            _groupCanvasGroup.alpha = 1;
-        }
-
-        public void Clear()
-        {
-            ResetGroup();
+            if (Group != null)
+            {
+                Destroy(Group.gameObject);
+            }
         }
     }
 }

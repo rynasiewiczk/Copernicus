@@ -1,6 +1,7 @@
 namespace _Project.Scripts.UI
 {
     using System.Collections.Generic;
+    using LazySloth.Utilities;
     using Sirenix.OdinInspector;
     using UnityEngine;
 
@@ -47,6 +48,13 @@ namespace _Project.Scripts.UI
                     slot.Clear();
                 }
             }
+        }
+        
+        //debug
+        [Button]
+        private void DestroyGroups()
+        {
+            _slots.ForEach(x => x.DestroyGroup());
         }
     }
 }

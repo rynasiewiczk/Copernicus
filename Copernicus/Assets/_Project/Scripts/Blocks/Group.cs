@@ -55,5 +55,10 @@ namespace _Project.Scripts
         }
 
         public void SetActive(bool active) => gameObject.SetActive(active);
+
+        public void SetParent(Transform parent)
+        {
+            transform.SetParent(parent, false);
+        }
     }
 }
