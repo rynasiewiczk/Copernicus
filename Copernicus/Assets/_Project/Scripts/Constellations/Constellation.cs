@@ -21,6 +21,7 @@ namespace _Project.Scripts.Constellations
         public Sprite Icon => _icon;
         public string Name => _name;
         public string Description => _description;
+        public bool IsPossibleToPutOnBoard { get; private set; }
 
         public Transform Root => gameObject.transform;
         public IReadOnlyList<ConstellationPart> Parts => _parts;
@@ -36,6 +37,11 @@ namespace _Project.Scripts.Constellations
         public void ResetRotation()
         {
             transform.eulerAngles = Vector3.zero;
+        }
+
+        public void MarkPossibleToPutOnBoard(bool isPossible)
+        {
+            IsPossibleToPutOnBoard = isPossible;
         }
 
         public void SetActive(bool active)

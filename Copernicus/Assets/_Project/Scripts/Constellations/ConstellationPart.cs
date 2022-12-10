@@ -11,6 +11,13 @@ namespace _Project.Scripts.Constellations
             return new Vector2Int(x, y);
         }
 
+        public Vector2Int GetLocalGridPosition()
+        {
+            var x = Mathf.RoundToInt(transform.localPosition.x);
+            var y = Mathf.RoundToInt(transform.localPosition.y);
+            return new Vector2Int(x, y);
+        }
+
         public void SetValid(bool valid)
         {
             transform.localScale = valid ? Vector3.one  * 2f : Vector3.one;

@@ -1,6 +1,7 @@
 namespace _Project.Scripts
 {
     using System.Collections.Generic;
+    using System.Linq;
     using Constellations;
     using DG.Tweening;
     using UnityEngine;
@@ -104,10 +105,7 @@ namespace _Project.Scripts
         public void PutConstellationOnBoard(Constellation constellation)
         {
             //todo: [kris] -> łączenie gwiazdek we wzór, pojawienie się konstelacji, itp
-            //trzeba też dodać jakis view dla konstelacji, póki co mają tylko gizmos
-            //zauważyłem też że kładąc cos mozna tym samym kliknieciem podniesc cos innego (ale nie wiem czy to problem na ten moment)
-            //jak ci sie chce to mozesz art pododawac :)
-            
+
             MarkStarsAsUsed();
             constellation.SetAsDroppedOnBoard();
             
@@ -139,6 +137,54 @@ namespace _Project.Scripts
             }
         }
 
+        public bool IsConstellationPossibleToPutOnBoard(Constellation constellation)
+        {
+            var startingPart = constellation.Parts.First();
+            var offset = startingPart.GetLocalGridPosition();
+
+            foreach (var block in _blocksOnBoard)
+            {
+                var originPosition = block.GetGridPosition();
+                if (IsConstellationPossibleToPut(originPosition))
+                {
+                    return true;
+                }
+                
+            }
+
+            return false;
+
+            bool IsConstellationPossibleToPut(Vector2Int originPosition)
+            {
+                foreach (var constellationPart in constellation.Parts)
+                {
+                    var positionToCheck = constellationPart.GetLocalGridPosition() - offset;
+                    positionToCheck += originPosition;
+                    if (!IsPartPossibleToPut(positionToCheck))
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+            
+            bool IsPartPossibleToPut(Vector2Int partPosition)
+            {
+                if (TryGetBlockAtPosition(partPosition, out var block))
+                {
+                    if (!block.HasStar || block.BlockStar.IsAlreadyUsed)
+                    {
+                        return false;
+                    }
+
+                    return true;
+                }
+
+                return false;
+            }
+        }
+        
         private bool TryGetBlockAtPosition(Vector2Int gridPosition, out Block block)
         {
             foreach (var blockOnBoard in _blocksOnBoard)

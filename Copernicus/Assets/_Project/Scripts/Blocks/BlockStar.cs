@@ -21,19 +21,19 @@ namespace _Project.Scripts
         
         public bool IsAlreadyUsed { get; private set; }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.M))
-            {
-                MarkUsed();
-            }
-
-            if (Input.GetKeyDown(KeyCode.N))
-            {
-                IsAlreadyUsed = false;
-                _spriteRenderer.sprite = _unusedStarSprite;
-            }
-        }
+        // private void Update()
+        // {
+        //     if (Input.GetKeyDown(KeyCode.M))
+        //     {
+        //         MarkUsed();
+        //     }
+        //
+        //     if (Input.GetKeyDown(KeyCode.N))
+        //     {
+        //         IsAlreadyUsed = false;
+        //         _spriteRenderer.sprite = _unusedStarSprite;
+        //     }
+        // }
         
         public void MarkUsed()
         {
@@ -48,7 +48,6 @@ namespace _Project.Scripts
             }));
             sequence.Append(transform.DOScale(1, _showDuration).SetEase(_showScaleCurve));
             sequence.Join(transform.DORotate(Vector3.forward * _showRotation, _showDuration, RotateMode.LocalAxisAdd));
-            //sequence.OnComplete(() => _transitionParticleSystem.Play());
         }
     }
 }
