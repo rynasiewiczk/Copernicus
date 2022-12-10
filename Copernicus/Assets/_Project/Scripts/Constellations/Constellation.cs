@@ -2,6 +2,7 @@ namespace _Project.Scripts.Constellations
 {
     using System;
     using System.Collections.Generic;
+    using CarterGames.Assets.AudioManager;
     using DG.Tweening;
     using Effects;
     using LazySloth.Observable;
@@ -24,6 +25,8 @@ namespace _Project.Scripts.Constellations
         [SerializeField] private float _fadeOutDuration = .3f;
         [SerializeField] private LineRendererConnection _droppedConnectionLinePrefab;
 
+        private int _prevValidParts;
+        
         public Sprite Icon => _icon;
         public string Name => _name;
         public string Description => _description;
@@ -73,10 +76,23 @@ namespace _Project.Scripts.Constellations
             transform.localPosition = Vector3.zero;
         }
 
-        public void SetAsDroppedOnBoard() => IsDroppedOnBoard = true;
+        public void SetAsDroppedOnBoard()
+        {
+            IsDroppedOnBoard = true;
+
+            var playingSource = AudioManager.instance.PlayAndGetSource("constellation_1");
+            AudioManager.instance.PlayWithDelay("constellation_2", playingSource.clip.length/3);
+        }
 
         public void RefreshPartsState(List<ConstellationPart> validParts)
         {
+            if (_prevValidParts != validParts.Count)
+            {
+                AudioManager.instance.Play("constellation_hover_over_star");
+            }
+
+            _prevValidParts = validParts.Count;
+            
             foreach (var part in _parts)
             {
                 part.SetValid(validParts.Contains(part));

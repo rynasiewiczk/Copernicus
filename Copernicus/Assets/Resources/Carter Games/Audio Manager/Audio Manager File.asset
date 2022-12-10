@@ -22,6 +22,12 @@ MonoBehaviour:
   library:
   - key: Time Goes By
     value: {fileID: 8300000, guid: 0f35d0da0c3232a498e0e585f3e77691, type: 3}
+  - key: constellation_1
+    value: {fileID: 8300000, guid: 3580f189572394c5d9730d99e74f027a, type: 3}
+  - key: constellation_2
+    value: {fileID: 8300000, guid: 5060f76890d26421ba26262a4aeed0e2, type: 3}
+  - key: constellation_hover_over_star
+    value: {fileID: 8300000, guid: 4c6fff56df9f84004a4efe9563427203, type: 3}
   - key: epic-place
     value: {fileID: 8300000, guid: ffbed72e93b4f4c57911a64cea8703a4, type: 3}
   - key: finish_game
@@ -32,7 +38,5 @@ MonoBehaviour:
     value: {fileID: 8300000, guid: 1c81d66dcba7f4400ac06d042927f4e2, type: 3}
   - key: hoover_in
     value: {fileID: 8300000, guid: 09eedeeb1e85545c7a6a78a60234a6e1, type: 3}
-  - key: hoover_in_2fd
-    value: {fileID: 8300000, guid: 1a8a01069a56e4c0dadb830dfa6bd386, type: 3}
   - key: hoover_out
     value: {fileID: 8300000, guid: d346a9cea044e418d8992048fd4e6b63, type: 3}
