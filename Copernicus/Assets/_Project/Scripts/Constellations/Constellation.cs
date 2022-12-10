@@ -102,7 +102,7 @@ namespace _Project.Scripts.Constellations
                 }
                 else if (r is LineRenderer lr)
                 {
-                    lr.DOColor(new Color2(Color.white, Color.white), new Color2(Color.clear, Color.clear), _fadeOutDuration);
+                    lr.gameObject.SetActive(false);
                 }
             }
 
