@@ -39,12 +39,15 @@ namespace _Project.Scripts
             
             CreateGroups(_initialGroupsSize);
             FillUpGroupsToShow();
+            
+            RefreshConstellationsPossibility();
         }
 
         public void PutGroupOnMap(Group group)
         {
             _groupsToShow.Remove(group);
             FillUpGroupsToShow();
+            RefreshConstellationsPossibility();
         }
 
         public void PutConstellationOnMap(Constellation constellation)
@@ -54,6 +57,7 @@ namespace _Project.Scripts
             CreateGroups(2); //todo: define based on constellations
             FillUpGroupsToShow();
             FillUpConstellations();
+            RefreshConstellationsPossibility();
         }
 
         private void FillUpGroupsToShow()
@@ -95,6 +99,14 @@ namespace _Project.Scripts
                 var numberOfStars = Random.Range(1, maxStars);
                 newGroup.Init(numberOfStars);
                 _groupsQueue.Enqueue(newGroup);
+            }
+        }
+
+        private void RefreshConstellationsPossibility()
+        {
+            foreach (var constellation in _currentConstellations)
+            {
+                constellation.MarkPossibleToPutOnBoard(BoardController.Instance.IsConstellationPossibleToPutOnBoard(constellation));
             }
         }
     }
