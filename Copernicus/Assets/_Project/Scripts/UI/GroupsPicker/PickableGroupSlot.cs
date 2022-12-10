@@ -1,6 +1,7 @@
 namespace _Project.Scripts.UI
 {
     using System;
+    using JetBrains.Annotations;
     using UnityEngine;
     using UnityEngine.UI;
 
@@ -8,48 +9,53 @@ namespace _Project.Scripts.UI
     {
         [SerializeField] private Button _button;
         [SerializeField] private RectTransform _container;
-        
-        public UiGroup UiGroup { get; private set; }
+        [SerializeField] private UiGroup _uiGroup;
+
+        [SerializeField] private CanvasGroup _groupCanvasGroup;
+
+        public UiGroup UiGroup => _uiGroup;
 
         public bool HasGroup => UiGroup != null;
 
         private void OnEnable()
         {
             _button.onClick.AddListener(TryPickUpGroup);
+            PlayerController.instance.OnUnpickedGroup += ShowGroup;
         }
 
         private void OnDisable()
         {
             _button.onClick.RemoveListener(TryPickUpGroup);
+            PlayerController.instance.OnUnpickedGroup -= ShowGroup;
+        }
+
+        public void SetGroup([CanBeNull] Group group)
+        {
+            _uiGroup.Initialize(group);
         }
 
         private void TryPickUpGroup()
         {
-            Debug.Log($"<color=green>try pick up {UiGroup.name}</color>");
-        }
-
-        public void SetGroup(UiGroup group)
-        {
-            UiGroup = group;
-            UiGroup.transform.SetParent(_container, false);
-        }
-
-        public bool TryGetGroup(out Group group)
-        {
-            if (HasGroup)
+            var didPickUp = PlayerController.instance.TryPickUpGroup(UiGroup.Group);
+            if (didPickUp)
             {
-                group = UiGroup.Group;
-                return true;
+                HideGroup();
             }
+        }
 
-            group = null;
-            return false;
+        private void HideGroup()
+        {
+            _groupCanvasGroup.alpha = 0;
+        }
+
+        private void ShowGroup(Group _)
+        {
+            _groupCanvasGroup.alpha = 1;
         }
 
         public void Clear()
         {
-            Destroy(UiGroup.gameObject);
-            UiGroup = null;
+            SetGroup(null);
         }
     }
 }

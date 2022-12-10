@@ -10,7 +10,10 @@ namespace _Project.Scripts
         public RectTransform RectTransform => transform as RectTransform;
 
         private Vector2 Size => RectTransform.sizeDelta;
+        public bool IsActive => gameObject.activeInHierarchy;
 
+        public void SetActive(bool active) => gameObject.SetActive(active);
+        
         public Vector2Int GetGridPosition()
         {
             return _gridPosition;
@@ -27,5 +30,6 @@ namespace _Project.Scripts
             RectTransform.anchoredPosition = GetGridPosition() * Size;
             gameObject.name = $"UiBlock_{GetGridPosition().x}_{GetGridPosition().y}";
         }
+
     }
 }
