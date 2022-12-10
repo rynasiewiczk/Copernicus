@@ -583,6 +583,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1130cc1584d4cf188c516db99d257ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _groupsCatalog: {fileID: 11400000, guid: 3202f4772f78949aa898cd4707e8c443, type: 2}
+  _initialGroupsSize: 10
+  _maxGropusToShow: 3
 --- !u!4 &1419050706
 Transform:
   m_ObjectHideFlags: 0
