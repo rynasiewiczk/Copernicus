@@ -14,7 +14,9 @@ namespace _Project.Scripts
         [SerializeField] private Color _defaultColor;
         [SerializeField] private Color _invalidPlaceColor;
         [SerializeField] private Color _validPlaceColor;
-        [SerializeField] private float _rotationDuration = .33f;
+
+        private float _rotationDuration = .15f;
+        private float _dropOnMapDuration = .15f;
 
         public Transform Root => gameObject.transform;
         public IReadOnlyList<Block> Blocks => _blocks;
@@ -31,10 +33,14 @@ namespace _Project.Scripts
 
         public void DropOnMap()
         {
+            var reason = new InteractionIgnoreReason("Placing block");
+            GameController.Instance.InteractionIgnoreReasons.Add(reason);
+            DOVirtual.DelayedCall(_dropOnMapDuration, () => GameController.Instance.InteractionIgnoreReasons.Remove(reason));
+
             foreach (var block in _blocks)
             {
                 block.SetColor(_defaultColor);
-                block.DropOnMap();
+                block.DropOnMap(_dropOnMapDuration);
             }
         }
 
@@ -52,7 +58,7 @@ namespace _Project.Scripts
         {
             var interactionIgnoreReason = new InteractionIgnoreReason("Rotating group");
             GameController.Instance.InteractionIgnoreReasons.Add(interactionIgnoreReason);
-            transform.DORotate(transform.eulerAngles += new Vector3(0, 0, -90), _rotationDuration).OnComplete(() =>
+            transform.DORotate(new Vector3(0, 0, -90), _rotationDuration, RotateMode.WorldAxisAdd).OnComplete(() =>
             {
                 GameController.Instance.InteractionIgnoreReasons.Remove(interactionIgnoreReason);
             });
@@ -62,7 +68,7 @@ namespace _Project.Scripts
         {
             var interactionIgnoreReason = new InteractionIgnoreReason("Rotating group");
             GameController.Instance.InteractionIgnoreReasons.Add(interactionIgnoreReason);
-            transform.DORotate(transform.eulerAngles += new Vector3(0, 0, 90), _rotationDuration).OnComplete(() =>
+            transform.DORotate(new Vector3(0, 0, 90), _rotationDuration, RotateMode.WorldAxisAdd).OnComplete(() =>
             {
                 GameController.Instance.InteractionIgnoreReasons.Remove(interactionIgnoreReason);
             });
@@ -79,7 +85,6 @@ namespace _Project.Scripts
         public void SetParent(Transform parent)
         {
             transform.SetParent(parent, false);
-            transform.localPosition = Vector3.zero;
         }
 
         public void ResetColor() => _blocks.ForEach(x => x.SetColor(_defaultColor));

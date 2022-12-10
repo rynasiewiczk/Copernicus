@@ -1,13 +1,14 @@
 namespace _Project.Scripts
 {
-    using System;
     using System.Collections.Generic;
     using Constellations;
+    using DG.Tweening;
     using UnityEngine;
 
     public class BoardController : SingletonBehaviour<BoardController>
     {
         [SerializeField] private GroupsCatalog _groupsCatalog;
+        [SerializeField] private float _dropGroupOnGridDuration = .15f;
         
         private readonly List<Vector2Int> _neighborsPositions = new()
         {
