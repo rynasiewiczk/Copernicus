@@ -14,6 +14,14 @@ namespace _Project.Scripts.Constellations
         [SerializeField] private List<LineRenderer> _lines;
         [SerializeField] private LineRenderer _linePrefab;
 
+        [SerializeField] private Sprite _icon;
+        [SerializeField] private string _name;
+        [SerializeField] private string _description;
+
+        public Sprite Icon => _icon;
+        public string Name => _name;
+        public string Description => _description;
+
         public Transform Root => gameObject.transform;
         public IReadOnlyList<ConstellationPart> Parts => _parts;
         public IReadOnlyList<ConstellationConnection> Connections => _connections;

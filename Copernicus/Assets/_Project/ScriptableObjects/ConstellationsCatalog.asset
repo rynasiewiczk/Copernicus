@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _constellations:
   - {fileID: 4265756405944947989, guid: 9e1b97cde8ba84c78a0d93c50118b399, type: 3}
+  - {fileID: 4265756405944947989, guid: dc67dd71bb6244c4998b56918de6bab0, type: 3}
