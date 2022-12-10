@@ -14,7 +14,8 @@ namespace _Project.Scripts
         [SerializeField] private Color _defaultColor;
         [SerializeField] private Color _invalidPlaceColor;
         [SerializeField] private Color _validPlaceColor;
-        [SerializeField] private float _rotationDuration = .33f;
+        
+        private float _rotationDuration = .15f;
 
         public Transform Root => gameObject.transform;
         public IReadOnlyList<Block> Blocks => _blocks;
@@ -52,7 +53,7 @@ namespace _Project.Scripts
         {
             var interactionIgnoreReason = new InteractionIgnoreReason("Rotating group");
             GameController.Instance.InteractionIgnoreReasons.Add(interactionIgnoreReason);
-            transform.DORotate(transform.eulerAngles += new Vector3(0, 0, -90), _rotationDuration).OnComplete(() =>
+            transform.DORotate(new Vector3(0, 0, -90), _rotationDuration, RotateMode.WorldAxisAdd).OnComplete(() =>
             {
                 GameController.Instance.InteractionIgnoreReasons.Remove(interactionIgnoreReason);
             });
@@ -62,7 +63,7 @@ namespace _Project.Scripts
         {
             var interactionIgnoreReason = new InteractionIgnoreReason("Rotating group");
             GameController.Instance.InteractionIgnoreReasons.Add(interactionIgnoreReason);
-            transform.DORotate(transform.eulerAngles += new Vector3(0, 0, 90), _rotationDuration).OnComplete(() =>
+            transform.DORotate(new Vector3(0, 0, 90), _rotationDuration, RotateMode.WorldAxisAdd).OnComplete(() =>
             {
                 GameController.Instance.InteractionIgnoreReasons.Remove(interactionIgnoreReason);
             });
