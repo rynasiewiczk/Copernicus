@@ -62,10 +62,14 @@ namespace _Project.Scripts
 
         public void PutGroupOnBoard(Group group)
         {
+            group.DropOnMap();
+            
             foreach (var blockInGroup in group.Blocks)
             {
                 _blocksOnBoard.Add(blockInGroup);
             }
+            
+            GameController.Instance.PutGroupOnMap(group);
         }
 
         public bool IsPositionValidForConstellation(Constellation constellation)

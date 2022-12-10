@@ -1,12 +1,16 @@
 namespace _Project.Scripts
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Constellations;
     using UnityEngine;
+    using Random = UnityEngine.Random;
 
     public class GameController : SingletonBehaviour<GameController>
     {
+        public event Action<Group> OnGroupShowing; 
+
         [Header("Groups")]
         [SerializeField] private GroupsCatalog _groupsCatalog;
         [SerializeField] private int _initialGroupsSize = 10;
@@ -54,7 +58,9 @@ namespace _Project.Scripts
                 {
                     var group = _groupsQueue.Dequeue();
                     _groupsToShow.Add(group);
-                    //refresh ui?
+                    
+                    OnGroupShowing?.Invoke(group);
+                    ////refresh ui?
                 }
             }
         }
@@ -76,7 +82,7 @@ namespace _Project.Scripts
             {
                 var groupToCreate = _groupsCatalog.GetRandomGroup();
                 var newGroup = Instantiate(groupToCreate);
-                newGroup.gameObject.SetActive(false);
+                newGroup.SetActive(false);
                 var maxStars = newGroup.Blocks.Count;
                 var numberOfStars = Random.Range(1, maxStars);
                 newGroup.Init(numberOfStars);

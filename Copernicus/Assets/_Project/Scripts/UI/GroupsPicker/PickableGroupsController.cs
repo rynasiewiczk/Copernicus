@@ -1,7 +1,6 @@
 namespace _Project.Scripts.UI
 {
     using System.Collections.Generic;
-    using Sirenix.OdinInspector;
     using UnityEngine;
 
     public class PickableGroupsController : MonoBehaviour
@@ -9,51 +8,31 @@ namespace _Project.Scripts.UI
         [SerializeField] private GroupsCatalog _groupsCatalog;
         [SerializeField] private List<PickableGroupSlot> _slots;
 
-        private void Start()
+        private void Awake()
         {
-            FillAllSlots();
+            GameController.Instance.OnGroupShowing += FillSlot;
         }
 
-        [Button]
-        private void FillAllSlots(bool replaceExisting = false)
+        private void OnDestroy()
         {
-            if (!replaceExisting)
+            if (GameController.Instance != null)
             {
-                foreach (var slot in _slots)
-                {
-                    if (!slot.HasGroup)
-                    {
-                        var group = _groupsCatalog.GetRandomGroup();
-                        var instance = Instantiate(group);
-                        slot.SetGroup(instance);
-                    }
-                }
-            }
-            else
-            {
-                ClearSlots();
-
-                FillAllSlots();
+                GameController.Instance.OnGroupShowing -= FillSlot;
             }
         }
 
-        [Button]
-        private void ClearSlots()
+        private void FillSlot(Group group)
         {
             foreach (var slot in _slots)
             {
-                if (slot.HasGroup)
+                if (slot.HasNotDroppedGroup)
                 {
-                    slot.Clear();
+                    continue;
                 }
+                
+                slot.SetGroup(group);
+                return;
             }
-        }
-        
-        //debug
-        [Button]
-        private void DestroyGroups()
-        {
-            _slots.ForEach(x => x.DestroyGroup());
         }
     }
 }

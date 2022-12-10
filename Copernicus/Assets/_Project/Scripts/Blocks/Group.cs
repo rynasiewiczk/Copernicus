@@ -62,6 +62,8 @@ namespace _Project.Scripts
                 block.SetColor(canPutOnBoard ? _validPlaceColor : _invalidPlaceColor);
             }
         }
+        
+        public void SetActive(bool active) => gameObject.SetActive(active);
 
         ///////////
 

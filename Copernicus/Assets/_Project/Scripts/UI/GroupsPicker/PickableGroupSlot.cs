@@ -14,7 +14,7 @@ namespace _Project.Scripts.UI
 
         public Group Group { get; private set; }
 
-        public bool HasGroup => Group != null;
+        public bool HasNotDroppedGroup => Group != null && !Group.IsOnMap;
 
         private void OnEnable()
         {
@@ -25,12 +25,17 @@ namespace _Project.Scripts.UI
         private void OnDisable()
         {
             _button.OnClicked -= TryPickUpGroup;
-            PlayerController.Instance.OnUnpickedGroup -= ResetGroupAsChild;
+
+            if (PlayerController.Instance != null)
+            {
+                PlayerController.Instance.OnUnpickedGroup -= ResetGroupAsChild;
+            }
         }
 
         public void SetGroup(Group group)
         {
             Group = group;
+            Group.SetActive(true);
             ResetGroupAsChild(Group);
         }
 
