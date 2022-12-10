@@ -54,6 +54,12 @@ namespace _Project.Scripts
 
         public void SetColor(Color color) => _spriteRenderer.color = color;
 
+        public void Hide()
+        {
+            _spriteRenderer.DOFade(0.2f, 1f);
+        }
+        
+
         private void Update()
         {
             transform.rotation = Quaternion.identity;
