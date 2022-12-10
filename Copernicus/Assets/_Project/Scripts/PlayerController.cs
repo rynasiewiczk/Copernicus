@@ -39,11 +39,6 @@ namespace _Project.Scripts
         
         private void Update()
         {
-            // if (Input.GetKeyDown(KeyCode.A))
-            // {
-            //     GameController.Instance.gameObject.SetActive(false);
-            // }
-            
             MoveGroupWithCursor();
 
             CheckIfCanPutOnBoard();
@@ -114,7 +109,8 @@ namespace _Project.Scripts
 
             if (_currentDraggable is Constellation constellation)
             {
-                var canPutOnBoard = BoardController.Instance.IsPositionValidForConstellation(constellation);
+                var canPutOnBoard = BoardController.Instance.IsPositionValidForConstellation(constellation, out var validParts);
+                constellation.RefreshPartsState(validParts);
                 return canPutOnBoard;
             }
 

@@ -48,6 +48,14 @@ namespace _Project.Scripts.Constellations
         }
 
         public void SetAsDroppedOnBoard() => IsDroppedOnBoard = true;
+
+        public void RefreshPartsState(List<ConstellationPart> validParts)
+        {
+            foreach (var part in _parts)
+            {
+                part.SetValid(validParts.Contains(part));
+            }
+        }
         
         #if UNITY_EDITOR
         [Button]

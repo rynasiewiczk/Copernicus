@@ -72,29 +72,32 @@ namespace _Project.Scripts
             GameController.Instance.PutGroupOnMap(group);
         }
 
-        public bool IsPositionValidForConstellation(Constellation constellation)
+        public bool IsPositionValidForConstellation(Constellation constellation, out List<ConstellationPart> validParts)
         {
+            validParts = new List<ConstellationPart>();
             foreach (var constellationPart in constellation.Parts)
             {
                 if (TryGetBlockAtPosition(constellationPart.GetGridPosition(), out var blockOnMap))
                 {
                     if (!blockOnMap.HasStar)
                     {
-                        return false;
+                        continue;
                     }
 
                     if (blockOnMap.HasStar && blockOnMap.BlockStar.IsAlreadyUsed)
                     {
-                        return false;
+                        continue;
                     }
+                    
+                    validParts.Add(constellationPart);
                 }
                 else
                 {
-                    return false;
+                    continue;
                 }
             }
 
-            return true;
+            return validParts.Count == constellation.Parts.Count;
         }
         
         public void PutConstellationOnBoard(Constellation constellation)
