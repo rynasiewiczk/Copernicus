@@ -8,6 +8,8 @@ namespace _Project.Scripts.Hammer
         public Transform Root => transform;
         public ObservableProperty<bool> IsDragged { get; } = new();
 
+        private Block _currentTarget;
+
         public void SetWorldPosition(Vector3 position)
         {
             transform.position = position;
@@ -27,7 +29,41 @@ namespace _Project.Scripts.Hammer
         
         public void ResetRotation()
         {
-            
+        }
+
+        private void Update()
+        {
+            if (!IsDragged.Value)
+            {
+                if (_currentTarget != null)
+                {
+                    _currentTarget.Highlight(false);
+                    _currentTarget = null;
+                }
+                
+                return;
+            }
+
+            if (BoardController.Instance.IsPositionValidForHammer(this))
+            {
+                BoardController.Instance.TryGetBlockAtPosition(GetGridPosition(), out var block);
+                {
+                    if (_currentTarget != block)
+                    {
+                        if(_currentTarget != null) _currentTarget.Highlight(false);
+                        _currentTarget = block;
+                        block.Highlight(true);
+                    }
+                }
+            }
+            else
+            {
+                if (_currentTarget != null)
+                {
+                    _currentTarget.Highlight(false);
+                    _currentTarget = null;
+                }
+            }
         }
         
         public Vector2Int GetGridPosition()
