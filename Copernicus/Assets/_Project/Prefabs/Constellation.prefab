@@ -166,3 +166,8 @@ MonoBehaviour:
   _connections: []
   _lines: []
   _linePrefab: {fileID: 7113791110963775631, guid: 1133f0a4fd48543f5a7bf16d84df4339, type: 3}
+  _icon: {fileID: 0}
+  _name: 
+  _description: 
+  _fadeOutDuration: 0.22
+  _droppedConnectionLinePrefab: {fileID: 1231095630998731123, guid: 9ee2b0019fae24b5fadac700bdac293a, type: 3}

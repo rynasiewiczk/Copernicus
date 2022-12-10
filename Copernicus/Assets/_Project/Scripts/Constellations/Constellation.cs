@@ -2,6 +2,8 @@ namespace _Project.Scripts.Constellations
 {
     using System;
     using System.Collections.Generic;
+    using DG.Tweening;
+    using Effects;
     using Sirenix.OdinInspector;
     using Unity.VisualScripting;
     using UnityEngine;
@@ -18,6 +20,9 @@ namespace _Project.Scripts.Constellations
         [SerializeField] private string _name;
         [SerializeField] private string _description;
 
+        [SerializeField] private float _fadeOutDuration = .3f;
+        [SerializeField] private LineRendererConnection _droppedConnectionLinePrefab;
+
         public Sprite Icon => _icon;
         public string Name => _name;
         public string Description => _description;
@@ -26,7 +31,7 @@ namespace _Project.Scripts.Constellations
         public Transform Root => gameObject.transform;
         public IReadOnlyList<ConstellationPart> Parts => _parts;
         public IReadOnlyList<ConstellationConnection> Connections => _connections;
-        
+
         public bool IsDroppedOnBoard { get; private set; }
 
         public void SetWorldPosition(Vector3 position)
@@ -54,7 +59,7 @@ namespace _Project.Scripts.Constellations
             transform.SetParent(parent);
             transform.localScale = scale;
         }
-        
+
         public void SetParent(Transform container)
         {
             transform.SetParent(container, false);
@@ -70,8 +75,38 @@ namespace _Project.Scripts.Constellations
                 part.SetValid(validParts.Contains(part));
             }
         }
-        
-        #if UNITY_EDITOR
+
+        public void HandlePutOnMap()
+        {
+            var renderers = GetRenderers();
+            foreach (var r in renderers)
+            {
+                if (r is SpriteRenderer sr)
+                {
+                    sr.DOFade(0, _fadeOutDuration);
+                }
+                else if (r is LineRenderer lr)
+                {
+                    lr.DOColor(new Color2(Color.white, Color.white), new Color2(Color.clear, Color.clear), _fadeOutDuration);
+                }
+            }
+
+            DOVirtual.DelayedCall(_fadeOutDuration / 2, () =>
+            {
+                foreach (var connection in _connections)
+                {
+                    var instance = Instantiate(_droppedConnectionLinePrefab);
+                    instance.Show(connection.First.GetGridPosition(), connection.Second.GetGridPosition());
+                }
+            });
+        }
+
+        private Renderer[] GetRenderers()
+        {
+            return GetComponentsInChildren<Renderer>();
+        }
+
+#if UNITY_EDITOR
         [Button]
         public void Setup()
         {
@@ -92,18 +127,19 @@ namespace _Project.Scripts.Constellations
                 _lines.Add(newLine);
             }
         }
-        #endif
+#endif
 
         private void OnDrawGizmos()
         {
-            if(_connections == null) { return; }
+            if (_connections == null) { return; }
+
             foreach (var connection in _connections)
             {
                 if (connection.First == null || connection.Second == null)
                 {
                     continue;
                 }
-                
+
                 Gizmos.color = Color.green;
                 Gizmos.DrawLine(connection.First.transform.position, connection.Second.transform.position);
             }
