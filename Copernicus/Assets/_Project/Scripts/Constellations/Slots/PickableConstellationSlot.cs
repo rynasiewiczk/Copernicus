@@ -1,13 +1,13 @@
 namespace _Project.Scripts.Constellations
 {
-    using System;
     using DG.Tweening;
-    using UI;
     using UnityEngine;
 
     public class PickableConstellationSlot : MonoBehaviour
     {
         [SerializeField] private Transform _container;
+        [SerializeField] private float _zoomedInScale = .5f;
+        [SerializeField] private float _zoomSpeed = .2f;
 
         private Constellation _constellation;
 
@@ -41,12 +41,12 @@ namespace _Project.Scripts.Constellations
             if(PlayerController.Instance.HasDraggable) { return; }
             if(GameController.Instance.HasInteractionIgnoreReason) { return;}
             
-            _container.DOScale(0.7f, 0.3f);
+            _container.DOScale(_zoomedInScale, _zoomSpeed);
         }
 
         private void OnMouseExit()
         {
-            _container.DOScale(0.3f, 0.3f);
+            _container.DOScale(0.3f, _zoomSpeed);
         }
 
         public void SetConstellation(Constellation constellation)

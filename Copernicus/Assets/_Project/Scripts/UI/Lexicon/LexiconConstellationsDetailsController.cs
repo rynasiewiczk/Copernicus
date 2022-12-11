@@ -30,7 +30,7 @@ namespace _Project.Scripts.UI
             _image.sprite = _lockedSprite;
             //_nameTag.gameObject.SetActive(false);
             _nameText.text = string.Empty;
-            _descriptionText.text = "Build this constellation to see its description";
+            _descriptionText.text = "Zbuduj konstelację by odkryć jej opis.";
         }
     }
 }
