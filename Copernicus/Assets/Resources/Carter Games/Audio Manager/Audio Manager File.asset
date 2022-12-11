@@ -23,7 +23,7 @@ MonoBehaviour:
   - key: Time Goes By
     value: {fileID: 8300000, guid: 0f35d0da0c3232a498e0e585f3e77691, type: 3}
   - key: block_break
-    value: {fileID: 8300000, guid: 134e9fd3b025d4f9e83cab1220ada69a, type: 3}
+    value: {fileID: 8300000, guid: 6f0e7a06bde1c479c987cb6b9895c35c, type: 3}
   - key: constellation_1
     value: {fileID: 8300000, guid: 3580f189572394c5d9730d99e74f027a, type: 3}
   - key: constellation_2
