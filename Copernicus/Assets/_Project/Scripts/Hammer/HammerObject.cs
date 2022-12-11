@@ -5,6 +5,8 @@ namespace _Project.Scripts.Hammer
 
     public class HammerObject : MonoBehaviour, IDraggable
     {
+        [SerializeField] private GameObject _pointer;
+        
         public Transform Root => transform;
         public ObservableProperty<bool> IsDragged { get; } = new();
 
@@ -33,6 +35,8 @@ namespace _Project.Scripts.Hammer
 
         private void Update()
         {
+            _pointer.SetActive(IsDragged.Value);
+            
             if (!IsDragged.Value)
             {
                 if (_currentTarget != null)

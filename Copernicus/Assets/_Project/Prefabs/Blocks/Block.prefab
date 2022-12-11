@@ -217,6 +217,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _starContainer: {fileID: 8773976786983678603}
   _blockStarPrefab: {fileID: 2717195795936667814, guid: 8a050a91a49de4f0daf212b36d99198d, type: 3}
+  _destroyEffect: {fileID: 455315107452174441, guid: 46723526e5de445659956841738789d8, type: 3}
   _spriteRenderer: {fileID: 6425205518818223489}
   _highlightRenderer: {fileID: 2722248698757253057}
 --- !u!1 &8773976786983678603

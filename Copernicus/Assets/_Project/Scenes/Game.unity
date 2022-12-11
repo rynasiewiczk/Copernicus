@@ -2008,7 +2008,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1556819949}
   m_Lens:
     FieldOfView: 40
-    OrthographicSize: 8.039568
+    OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
@@ -2519,7 +2519,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 8.039568
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -4244,7 +4244,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2124467082}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.56, y: 3.5, z: 0}
+  m_LocalPosition: {x: -8.67, y: 4.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4299,7 +4299,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.36, y: 2.92}
+    oldSize: {x: 1.53, y: 1.55}
     newSize: {x: 0.16, y: 0.16}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -4349,7 +4349,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 50
-  m_Sprite: {fileID: 21300000, guid: 69414ad9c35124469b9418851e55a5e3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 29c04b67a9f9742afad741d8b3b699a7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4713,11 +4713,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4910603439041486755, guid: 72b7ecccbe5384b5a964d790a16bc508, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.18
+      value: 7.96
       objectReference: {fileID: 0}
     - target: {fileID: 4910603439041486755, guid: 72b7ecccbe5384b5a964d790a16bc508, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.31
+      value: 0.49
       objectReference: {fileID: 0}
     - target: {fileID: 4910603439041486755, guid: 72b7ecccbe5384b5a964d790a16bc508, type: 3}
       propertyPath: m_LocalPosition.z
