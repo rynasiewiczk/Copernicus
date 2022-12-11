@@ -433,6 +433,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5534661543418241272, guid: 1a5d44005bb2e40399cf95a95f40d51d, type: 3}
+      propertyPath: _requiredConstellationsToEnable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5534661543418241272, guid: 1a5d44005bb2e40399cf95a95f40d51d, type: 3}
       propertyPath: _connections.Array.data[0]._first
       value: 
       objectReference: {fileID: 3737983060697767741}
