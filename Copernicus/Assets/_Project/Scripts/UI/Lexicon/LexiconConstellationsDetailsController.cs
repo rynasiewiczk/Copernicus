@@ -12,12 +12,15 @@ namespace _Project.Scripts.UI
         [SerializeField] private Image _nameTag;
         [SerializeField] private TextMeshProUGUI _descriptionText;
 
-        [SerializeField] private Sprite _lockedSprite;
+        [SerializeField] private GameObject _viewRoot;
+        [SerializeField] private GameObject _lockedRoot;
         
         public void Setup(Constellation constellation, bool isUnlocked)
         {
             if (isUnlocked)
             {
+                _viewRoot.SetActive(true);
+                _lockedRoot.SetActive(false);
                 _image.sprite = constellation.Icon;
                 //_nameTag.gameObject.SetActive(true);
                 _nameTag.sprite = constellation.NameTag;
@@ -27,10 +30,8 @@ namespace _Project.Scripts.UI
                 return;
             }
 
-            _image.sprite = _lockedSprite;
-            //_nameTag.gameObject.SetActive(false);
-            _nameText.text = string.Empty;
-            _descriptionText.text = "Zbuduj konstelację by odkryć jej opis.";
+            _viewRoot.SetActive(false);
+            _lockedRoot.SetActive(true);
         }
     }
 }
