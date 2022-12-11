@@ -1,5 +1,6 @@
 namespace _Project.Scripts
 {
+    using CarterGames.Assets.AudioManager;
     using DG.Tweening;
     using Sirenix.OdinInspector;
     using UnityEngine;
@@ -33,6 +34,7 @@ namespace _Project.Scripts
 
         public void Destroy()
         {
+            AudioManager.instance.Play("block_break");
             _group.RemoveBlock(this);
             Destroy(gameObject);
         }
