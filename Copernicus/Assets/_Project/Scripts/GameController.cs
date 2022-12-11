@@ -152,6 +152,11 @@ namespace _Project.Scripts
                 _isGameOver = false;
                 SceneManager.LoadScene(0);
             }
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadScene(0);
+            }
         }
 
         private void CheckForGameOver()
