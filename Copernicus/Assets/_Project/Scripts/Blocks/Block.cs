@@ -9,6 +9,7 @@ namespace _Project.Scripts
     {
         [SerializeField] private GameObject _starContainer;
         [SerializeField] private BlockStar _blockStarPrefab;
+        [SerializeField] private GameObject _destroyEffect;
 
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private SpriteRenderer _highlightRenderer;
@@ -34,6 +35,8 @@ namespace _Project.Scripts
 
         public void Destroy()
         {
+            var effect = Instantiate(_destroyEffect);
+            effect.transform.position = transform.position;
             AudioManager.instance.Play("block_break");
             _group.RemoveBlock(this);
             Destroy(gameObject);

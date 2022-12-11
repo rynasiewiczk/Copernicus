@@ -38,12 +38,12 @@ namespace _Project.Scripts.Hammer
             if(PlayerController.Instance.HasDraggable) { return; }
             if(GameController.Instance.HasInteractionIgnoreReason) { return;}
             
-            _container.DOScale(0.5f, 0.3f);
+            _container.DOScale(0.6f, 0.3f);
         }
 
         private void OnMouseExit()
         {
-            _container.DOScale(0.3f, 0.3f);
+            _container.DOScale(0.5f, 0.3f);
         }
 
         private void ResetHammerAsChild(IDraggable draggable)
