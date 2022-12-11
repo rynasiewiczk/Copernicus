@@ -6,6 +6,7 @@ namespace _Project.Scripts
     using CarterGames.Assets.AudioManager;
     using Constellations;
     using DG.Tweening;
+    using LazySloth.Utilities;
     using UnityEngine;
     using UnityEngine.SceneManagement;
     using Random = UnityEngine.Random;
@@ -35,6 +36,8 @@ namespace _Project.Scripts
 
         private readonly List<Constellation> _currentConstellations = new();
         private readonly List<Constellation> _droppedConstellations = new();
+
+        private int _createdConstellationsCount;
 
         public int GroupsQueueCount => _groupsQueue.Count;
         public IReadOnlyList<Constellation> DroppedConstellations => _droppedConstellations;
@@ -66,14 +69,16 @@ namespace _Project.Scripts
         public void PutConstellationOnMap(Constellation constellation)
         {
             _currentConstellations.Remove(constellation);
-
+            
             if (_droppedConstellations.All(x => x.Name != constellation.Name))
             {
                 OnNewConstellationPlaced?.Invoke(constellation);
             }
             
             _droppedConstellations.Add(constellation);
-            CreateGroups(2); //todo: define based on constellations
+            _createdConstellationsCount += 1;
+            var blocksToAdd = Mathf.Max(2,constellation.Parts.Count - 1);
+            CreateGroups(blocksToAdd);
             FillUpGroupsToShow();
             FillUpConstellations();
             RefreshConstellationsPossibility();
@@ -99,10 +104,13 @@ namespace _Project.Scripts
         
         private void FillUpConstellations()
         {
+            var constellationsToUse = _constellationsCatalog.Constellations
+                .Where(x => x.RequiredConstellationsToEnable <= _createdConstellationsCount)
+                .ToList();
             var missingConstellations = _maxConstellations - _currentConstellations.Count;
             for (var i = 0; i < missingConstellations; i++)
             {
-                var constellation = _constellationsCatalog.GetRandomConstellation();
+                var constellation = constellationsToUse.GetRandom();
                 var newConstellation = Instantiate(constellation);
                 _currentConstellations.Add(newConstellation);
                 
