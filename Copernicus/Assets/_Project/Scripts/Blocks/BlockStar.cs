@@ -15,7 +15,7 @@ namespace _Project.Scripts
 
         [SerializeField] private float _hideDuration = .075f;
         [SerializeField] private float _hideRotation = 360;
-        [SerializeField] private float _showDuration = .3f;
+        [SerializeField] private FloatRange _showDurationRange = new(.45f, .65f);
         [SerializeField] private FloatRange _showRotationRange = new(700, 740);
         
         [SerializeField] private AnimationCurve _showScaleCurve;
@@ -77,8 +77,10 @@ namespace _Project.Scripts
                 _spriteRenderer.sprite = _usedStarSprite;
                 _transitionParticleSystem.Play();
             }));
-            sequence.Append(transform.DOScale(1, _showDuration).SetEase(_showScaleCurve));
-            sequence.Join(transform.DORotate(Vector3.forward * _showRotationRange.GetRandom(), _showDuration, RotateMode.LocalAxisAdd));
+
+            var showDuration = _showDurationRange.GetRandom();
+            sequence.Append(transform.DOScale(1, showDuration).SetEase(_showScaleCurve));
+            sequence.Join(transform.DORotate(Vector3.forward * _showRotationRange.GetRandom(), showDuration, RotateMode.LocalAxisAdd));
             sequence.OnComplete(() => _isTransitioning = false);
         }
     }

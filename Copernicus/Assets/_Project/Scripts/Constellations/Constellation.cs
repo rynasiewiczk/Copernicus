@@ -170,6 +170,8 @@ namespace _Project.Scripts.Constellations
                     instance.Show(connection.First.GetGridPosition(), connection.Second.GetGridPosition());
                 }
             });
+
+            DOVirtual.DelayedCall(_fadeOutDuration, () => gameObject.SetActive(false));
         }
 
         private Renderer[] GetRenderers()

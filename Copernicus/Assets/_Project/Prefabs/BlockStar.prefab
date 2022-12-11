@@ -52,7 +52,9 @@ MonoBehaviour:
   _usedStarSprite: {fileID: 21300000, guid: 7a72df99161c24f38a9822252c01fff6, type: 3}
   _hideDuration: 0.12
   _hideRotation: 360
-  _showDuration: 0.55
+  _showDurationRange:
+    _min: 0.5
+    _max: 0.6
   _showRotationRange:
     _min: 710
     _max: 730
