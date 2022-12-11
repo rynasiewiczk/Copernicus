@@ -394,7 +394,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2543418703041468589
 RectTransform:
   m_ObjectHideFlags: 0
@@ -412,8 +412,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -87, y: 350}
-  m_SizeDelta: {x: 231.561, y: 225.01}
+  m_AnchoredPosition: {x: -2, y: -101}
+  m_SizeDelta: {x: 441.8685, y: 117.6527}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2543418703041468591
 CanvasRenderer:
@@ -443,10 +443,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Capricorn
+  m_text: Koziorozec
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 31f1d6e42406e4e7eb488197610a4001, type: 2}
-  m_sharedMaterial: {fileID: 4535039138947802503, guid: 31f1d6e42406e4e7eb488197610a4001, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7877eace2dc4b4bee91e97b951765fc8, type: 2}
+  m_sharedMaterial: {fileID: 1843363138982086259, guid: 7877eace2dc4b4bee91e97b951765fc8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -470,12 +470,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 62.05
+  m_fontSize: 75
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 100
+  m_fontSizeMax: 75
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -1268,7 +1268,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1087780274844230594
 RectTransform:
   m_ObjectHideFlags: 0

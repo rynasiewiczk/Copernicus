@@ -19,7 +19,7 @@ namespace _Project.Scripts.UI
             if (isUnlocked)
             {
                 _image.sprite = constellation.Icon;
-                _nameTag.gameObject.SetActive(true);
+                //_nameTag.gameObject.SetActive(true);
                 _nameTag.sprite = constellation.NameTag;
                 _nameText.text = constellation.Name;
                 _descriptionText.text = constellation.Description;
@@ -28,7 +28,7 @@ namespace _Project.Scripts.UI
             }
 
             _image.sprite = _lockedSprite;
-            _nameTag.gameObject.SetActive(false);
+            //_nameTag.gameObject.SetActive(false);
             _nameText.text = string.Empty;
             _descriptionText.text = "Build this constellation to see its description";
         }
